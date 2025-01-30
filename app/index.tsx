@@ -1,4 +1,5 @@
 import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,49 +9,33 @@ import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 import OnboardingImage from "@/components/OnboardingImage";
 import OnboardingTitle from "@/components/OnboardingTitle";
+import OnboardingSubtitle from "@/components/OnboardingSubtitle";
 
 export default function index() {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="light" backgroundColor={COLORS.backgroundGrey}/>
       <Onboarding
         pages={[
           {
             backgroundColor: COLORS.backgroundGrey,
             image: <OnboardingImage source={IMAGES.onboard1} />,
             title: <OnboardingTitle title={"Dictionary"} />,
-            subtitle: (
-              <Text>
-                " Unlock the meaning of every word with ease; your personal
-                dictionary is now at your fingertips, ready to help you explore
-                definitions, synonyms, and expand your vocabulary effortlessly.
-                "
-              </Text>
-            ),
+            subtitle: <OnboardingSubtitle subTitle={'" Unlock the meaning of every word with ease; your personal dictionary is now at your fingertips, ready to help you explore definitions, synonyms, and expand your vocabulary effortlessly. "'} />,
           },
 
           {
             backgroundColor: COLORS.backgroundGrey,
             image: <OnboardingImage source={IMAGES.onboard2} />,
             title: <OnboardingTitle title={"Translate"} />,
-            subtitle: (
-              <Text>
-                " See it, scan it, and translate it effortlessly turn any image
-                into text and understand the world around you in seconds. "
-              </Text>
-            ),
+            subtitle: <OnboardingSubtitle subTitle={'" See it, scan it, and translate it effortlessly turn any image into text and understand the world around you in seconds. "'}/>,
           },
 
           {
             backgroundColor: COLORS.backgroundGrey,
             image: <OnboardingImage source={IMAGES.onboard3} />,
             title: <OnboardingTitle title={"Translation"} />,
-            subtitle: (
-              <Text>
-                " Break language barriers and communicate globally with instant
-                translations that make understanding different languages simple
-                and seamless. "
-              </Text>
-            ),
+            subtitle: <OnboardingSubtitle subTitle={'" Break language barriers and communicate globally with instant translations that make understanding different languages simple and seamless. "'}/>,
           },
 
           {
@@ -59,14 +44,7 @@ export default function index() {
             title: (
               <OnboardingTitle title={"Simplify Your Login Experience!"} />
             ),
-            subtitle: (
-              <Text>
-                " Connect with your Google account for a seamless, secure, and
-                lightning-fast way to unlock all the powerful features
-                dictionary, translation, and image to text tools right at your
-                fingertips. "
-              </Text>
-            ),
+            subtitle: <OnboardingSubtitle subTitle={'" Connect with your Google account for a seamless, secure, and lightning-fast way to unlock all the powerful features dictionary, translation, and image to text tools right at your  fingertips. "'}/>,
           },
         ]}
       />

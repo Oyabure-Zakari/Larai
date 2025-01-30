@@ -17,5 +17,7 @@ export default function OnboardingTitle({ title }: OnboardingTitleProps) {
 const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE.mainText_Seoge.large,
+    fontFamily: "segoeui_blackItalic",
+    textAlign: "center"
   },
 });
