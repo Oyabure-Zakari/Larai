@@ -9,6 +9,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
+    SegoeUI_bold: require("../assets/fonts/segoe-ui-bold.ttf"),
+    SegoeUI_blackItalic: require("../assets/fonts/seguibli.ttf"),
     Consolas: require("../assets/fonts/Consolas-Bold.ttf"),
   });
 
