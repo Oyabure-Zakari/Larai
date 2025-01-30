@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
 
+// imported from onboard component
 type OnboardingImageProps = {
   source: { uri: string };
 };
@@ -11,8 +12,8 @@ export default function OnboardImage({ source }: OnboardingImageProps) {
 
 const styles = StyleSheet.create({
   image: {
-    width: 250,
-    height: 250,
+    width: 200,
+    height: 200,
     resizeMode: "contain",
   },
 });
