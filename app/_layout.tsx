@@ -21,12 +21,12 @@ export default function RootLayout() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
-  
+
   return (
-  <Stack>
-    <StatusBar style="dark"/>
-    <Stack.Screen name="index" options={{headerShown:false}}/>
-    <Stack.Screen name="(tabs)"/>
-  </Stack>
-);
+    <Stack>
+      <StatusBar style="dark" />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" />
+    </Stack>
+  );
 }
