@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
 
-// imported from onboard component
+// imported from onboardingUI component
 type OnboardingImageProps = {
   source: { uri: string };
 };

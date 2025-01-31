@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { FONT_SIZE } from "@/constants/fonts";
 
-// imported from onboard component
+// imported from onboardingUI component
 type OnboardingTitleProps = {
   title: string;
 };

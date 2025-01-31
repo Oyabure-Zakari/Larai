@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
 
-// imported from onboard component
+// imported from onboardingUI component
 type OnboardingSubtitleProps = {
   subTitle: string;
 };
