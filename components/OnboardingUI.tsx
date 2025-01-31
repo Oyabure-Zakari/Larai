@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -12,6 +12,7 @@ import { FONT_SIZE } from "@/constants/fonts";
 import OnboardingTitle from "@/components/OnboardingTitle";
 import OnboardingImage from "@/components/OnboardingImage";
 import OnboardingSubtitle from "@/components/OnboardingSubtitle";
+import { doneButton, nextButton } from "./OnboardingButtons";
 
 export default function OnboardingUI() {
   return (
@@ -19,6 +20,8 @@ export default function OnboardingUI() {
       <StatusBar style="light" backgroundColor={COLORS.backgroundGrey} />
       <Onboarding 
         bottomBarColor={COLORS.backgroundGrey}
+        NextButtonComponent={nextButton}
+        DoneButtonComponent={doneButton}
         pages={[
           {
             backgroundColor: COLORS.backgroundGrey,
@@ -50,16 +53,6 @@ export default function OnboardingUI() {
                 }
               />
           },
-
-          {
-            backgroundColor: COLORS.backgroundGrey,
-            image: <OnboardingImage source={IMAGES.onboard4} />,
-            title: <OnboardingTitle title={"Simplify Your Login Experience!"} />,
-            subtitle: <OnboardingSubtitle subTitle={
-                  '" Connect with your Google account for a seamless, secure, and lightning-fast way to unlock all the powerful features dictionary, translation, and image to text tools right at your  fingertips. "'
-                }
-              />
-          },
         ]}
       />
     </SafeAreaView>
@@ -69,6 +62,10 @@ export default function OnboardingUI() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  nextButton:{
+    paddingRight: 16
   },
 
   text: {
