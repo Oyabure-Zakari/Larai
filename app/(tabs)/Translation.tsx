@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text} from 'react-native'
 import React from 'react'
 import { FONT_SIZE } from '@/constants/fonts'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Translation() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Translation</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 

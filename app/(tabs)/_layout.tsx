@@ -16,11 +16,13 @@ export default function TabsLayout() {
       }>
       <Tabs.Screen 
         name="index" 
-        options={{ tabBarLabel: "Dictionary" }} />
+        options={{ tabBarLabel: "Dictionary" }} 
+      />
 
       <Tabs.Screen 
         name="Translate" 
-        options={{ tabBarLabel: "Translate" }} />
+        options={{ tabBarLabel: "Translate" }} 
+      />
 
       <Tabs.Screen
         name="Translation"

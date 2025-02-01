@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text} from 'react-native'
 import React from 'react'
 import { FONT_SIZE } from '@/constants/fonts'
 import { StatusBar } from 'expo-status-bar'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Dictionary() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar/>
       <Text style={styles.text}>Dictionary</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 
