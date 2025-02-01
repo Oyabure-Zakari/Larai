@@ -9,10 +9,11 @@ import { IMAGES } from "@/constants/images";
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
-import OnboardingTitle from "@/components/OnboardingTitle";
-import OnboardingImage from "@/components/OnboardingImage";
-import OnboardingSubtitle from "@/components/OnboardingSubtitle";
+import OnboardingTitle from "@/components/onboarding/OnboardingTitle";
+import OnboardingImage from "@/components/onboarding/OnboardingImage";
+import OnboardingSubtitle from "@/components/onboarding/OnboardingSubtitle";
 import { doneButton, nextButton } from "./OnboardingButtons";
+
 
 export default function OnboardingUI() {
   return (
