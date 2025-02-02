@@ -5,4 +5,5 @@ export const IMAGES = {
   onboard4: require("../assets/images/4-Onboard.png"),
   icon: require("../assets/images/icon.png"),
   googleIcon: require("../assets/images/google icon.png"),
+  laraiLogo: require("../assets/images/adaptive-icon.png"),
 }

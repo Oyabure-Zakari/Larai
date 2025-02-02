@@ -22,7 +22,8 @@ export const doneButton = () => {
   return (
     <View style={styles.button}>
       <Button 
-        onPress={() => router.push("/(tabs)")}
+        // onPress={() => router.push("/(tabs)")}
+        onPress={() => router.push("/auth/GoogleLogin")}
         title="Get Started" color={COLORS.primaryBlack}
         />
     </View>
