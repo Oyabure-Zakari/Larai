@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { COLORS } from "@/constants/colors";
-import { MaterialCommunityIcons, AntDesign, Ionicons } from "@expo/vector-icons";
+import { Entypo, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
 export default function TabsLayout() {
   return (
@@ -19,10 +19,9 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="index" 
         options={{ 
-          tabBarLabel: "Dictionary",
           tabBarIcon:({color, size}) => (
-            <MaterialCommunityIcons
-              name="book-open-page-variant-outline"
+            <MaterialIcons
+              name="library-books"
               color={color}
               size={size}
             />
@@ -33,10 +32,9 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="Translate" 
         options={{ 
-          tabBarLabel: "Translate",
           tabBarIcon:({color, size}) => (
-            <AntDesign
-              name="camerao"
+            <Entypo
+              name="images"
               color={color}
               size={size}
             />
@@ -47,9 +45,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="Translation"
         options={{ 
-          tabBarLabel: "Translation",
           tabBarIcon:({color, size}) => (
-            <Ionicons
+            <FontAwesome
               name="language"
               color={color}
               size={size}
