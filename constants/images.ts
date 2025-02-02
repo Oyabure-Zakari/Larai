@@ -4,5 +4,5 @@ export const IMAGES = {
   onboard3: require("../assets/images/3-Onboard.png"),
   onboard4: require("../assets/images/4-Onboard.png"),
   icon: require("../assets/images/icon.png"),
-  googleIcon: require("../assets/images/icons8-google-48.png"),
+  googleIcon: require("../assets/images/google icon.png"),
 }
