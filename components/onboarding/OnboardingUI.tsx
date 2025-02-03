@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet} from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Onboarding from "react-native-onboarding-swiper";
@@ -17,6 +18,7 @@ import { doneButton, nextButton} from "./OnboardingButtons";
 export default function OnboardingUI() {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="light" backgroundColor={COLORS.backgroundGrey} />
       <Onboarding 
         bottomBarColor={COLORS.backgroundGrey}
         NextButtonComponent={nextButton}

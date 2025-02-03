@@ -10,7 +10,7 @@ export default function TabsLayout() {
         headerShown:false,
         tabBarActiveTintColor: COLORS.backgroundGrey,
         tabBarInactiveTintColor: COLORS.SecondaryBlack,
-        tabBarShowLabel:false,
+        tabBarShowLabel:true,
         tabBarStyle: {
           backgroundColor: COLORS.primaryBlack,
         }
@@ -19,6 +19,7 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="index" 
         options={{ 
+          tabBarLabel:"Dictionary",
           tabBarIcon:({color, size}) => (
             <MaterialIcons
               name="library-books"
@@ -32,6 +33,7 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="Translate" 
         options={{ 
+          tabBarLabel:"Image to Text",
           tabBarIcon:({color, size}) => (
             <Entypo
               name="images"
