@@ -9,7 +9,7 @@ export default function LaraiLogo() {
 
 const styles = StyleSheet.create({
   laraiLogo: {
-    width: 300,
+    width: 250,
     height: 150,
     resizeMode: "cover",
   },

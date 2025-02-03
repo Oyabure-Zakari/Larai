@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "segoeui_bold",
     color: COLORS.SecondaryBlack,
-    fontSize: FONT_SIZE.mainText_Seoge.small,
+    fontSize: FONT_SIZE.consolas.small,
   },
 });

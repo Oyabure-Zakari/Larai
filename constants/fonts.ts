@@ -4,7 +4,7 @@ export const FONT_SIZE = {
     small : 20
   },
   consolas: {
-    small : 20
+    small : 18
   },
 }
 
