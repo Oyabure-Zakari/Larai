@@ -1,38 +1,40 @@
-import React from 'react'
-import { Button } from 'react-native'
-import { StyleSheet, View } from 'react-native'
-import { useRouter } from 'expo-router'
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { useRouter } from "expo-router";
 
-import { COLORS } from '@/constants/colors'
+import { Button } from "react-native-elements";
 
-export const nextButton = ({...props}) => {
+import { COLORS } from "@/constants/colors";
+
+export const nextButton = ({ ...props }) => {
   return (
     <View style={styles.button}>
-      <Button 
-        title="Next" color={COLORS.primaryBlack}
+      <Button
+        title="Next"
+        buttonStyle={{ backgroundColor: COLORS.primaryBlack, borderRadius: 10 }}
+        titleStyle={{ fontFamily: "consolas", padding: 8 }}
         {...props}
-        />
+      />
     </View>
-  )
-}
-
+  );
+};
 
 export const doneButton = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <View style={styles.button}>
-      <Button 
-        // onPress={() => router.push("/(tabs)")}
+      <Button
+        title="Get Started"
+        buttonStyle={{ backgroundColor: COLORS.primaryBlack, borderRadius: 10 }}
+        titleStyle={{ fontFamily: "consolas", padding: 8 }}
         onPress={() => router.push("/auth/GoogleLogin")}
-        title="Get Started" color={COLORS.primaryBlack}
-        />
+      />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  button:{
-    paddingRight: 16
+  button: {
+    paddingRight: 16,
   },
-
-})
+});

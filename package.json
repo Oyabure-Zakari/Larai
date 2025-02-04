@@ -20,7 +20,7 @@
     "@react-navigation/native": "^7.0.14",
     "@rneui/themed": "^4.0.0-rc.8",
     "@types/react-native-onboarding-swiper": "^1.1.9",
-    "expo": "~52.0.26",
+    "expo": "~52.0.29",
     "expo-blur": "~14.0.3",
     "expo-constants": "~17.0.5",
     "expo-font": "~13.0.3",
