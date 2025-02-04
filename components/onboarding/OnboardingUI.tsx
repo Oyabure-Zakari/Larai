@@ -13,7 +13,7 @@ import OnboardingTitle from "@/components/onboarding/OnboardingTitle";
 import OnboardingImage from "@/components/onboarding/OnboardingImage";
 import OnboardingSubtitle from "@/components/onboarding/OnboardingSubtitle";
 
-import { doneButton, nextButton} from "./OnboardingButtons";
+import { doneButton, nextButton, skipButton} from "./OnboardingButtons";
 
 export default function OnboardingUI() {
   return (
@@ -21,6 +21,7 @@ export default function OnboardingUI() {
       <StatusBar style="light" backgroundColor={COLORS.backgroundGrey} />
       <Onboarding 
         bottomBarColor={COLORS.backgroundGrey}
+        SkipButtonComponent={skipButton}
         NextButtonComponent={nextButton}
         DoneButtonComponent={doneButton}
         pages={[

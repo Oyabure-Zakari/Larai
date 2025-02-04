@@ -5,6 +5,21 @@ import { useRouter } from "expo-router";
 import { Button } from "react-native-elements";
 
 import { COLORS } from "@/constants/colors";
+import { FONT_SIZE } from "@/constants/fonts";
+
+export const skipButton = () => {
+  const router = useRouter();
+  return (
+    <View style={styles.button}>
+      <Button
+        title="Skip"
+        buttonStyle={{ backgroundColor: COLORS.backgroundGrey, borderRadius: 10 }}
+        titleStyle={{color:COLORS.primaryBlack, fontSize: FONT_SIZE.consolas.small, fontFamily: "consolas", padding: 8 }}
+        onPress={() => router.push("/auth/GoogleLogin")}
+      />
+    </View>
+  );
+};
 
 export const nextButton = ({ ...props }) => {
   return (
