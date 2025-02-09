@@ -1,6 +1,17 @@
-# Welcome to your Expo app 👋
+# Welcome to Larai 📖
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+
+1. #### Unlock the meaning of every word with ease
+
+   Your personal dictionary is now at your fingertips, ready to help you explore definitions, synonyms, and expand your vocabulary effortlessly.
+
+2. #### See it, scan it, and translate it effortlessly
+
+   Turn any image into text and understand the world around you in seconds.
+
+3. #### Break language barriers and communicate globally
+   Instant translations make understanding different languages simple and seamless.
 
 ## Get started
 
