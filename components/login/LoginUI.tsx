@@ -6,11 +6,14 @@ import Glob from "@/components/login/Glob";
 import WriteUp from "@/components/login/WriteUp";
 import LoginBtn from "@/components/login/LoginBtn";
 import LaraiLogo from "@/components/login/LaraiLogo";
+import { StatusBar } from "react-native";
+import { COLORS } from "@/constants/colors";
 
 
 export default function LoginUI() {
   return (
     <ScrollView>
+      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
       <SafeAreaView style={styles.container}>
         <View style={styles.topView}>
           <LaraiLogo />
