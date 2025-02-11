@@ -4,6 +4,8 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 
 import { useEffect } from "react";
+import { StatusBar } from "react-native";
+import { COLORS } from "@/constants/colors";
 
 // prevent the splash screen from auto-hiding before assets load
 SplashScreen.preventAutoHideAsync();
@@ -23,6 +25,7 @@ export default function RootLayout() {
 
   return (
     <Stack>
+      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="auth" options={{ headerShown: false }} />
     </Stack>

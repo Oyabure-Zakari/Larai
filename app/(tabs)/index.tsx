@@ -7,11 +7,30 @@ import { COLORS } from '@/constants/colors'
 import { View } from 'react-native'
 import { TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native'
 
-
+import axios from 'axios';
 
 export default function Dictionary() {
   const router = useRouter()
+  const sendDictionary = async () => {
+    const options = {
+      method: 'GET',
+      url: 'https://word-dictionary-api1.p.rapidapi.com/api/WordDictionaryApi/',
+      params: {word: 'tree'},
+      headers: {
+        'x-rapidapi-key': 'bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a',
+        'x-rapidapi-host': 'word-dictionary-api1.p.rapidapi.com'
+      }
+    };
+    
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.backgroundGrey}/>
@@ -21,16 +40,16 @@ export default function Dictionary() {
       <View style={styles.back}>
         <TextInput style={styles.textInput}
           placeholder='dictionary'
-          placeholderTextColor={COLORS.SecondaryBlack}
+          placeholderTextColor={COLORS.secondaryGrey}
           multiline
         />
-        <View style={styles.sendBtn}>
+        <TouchableOpacity style={styles.sendBtn}>
           <Ionicons 
             name="send"
             size={20}
-            color={COLORS.primaryBlack}
+            color={COLORS.secondaryGrey}
           />
-        </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )
@@ -67,8 +86,9 @@ const styles = StyleSheet.create({
 
     textInput: {
       width:"85%",
+      height: 50,
       borderRadius: 10,
-      backgroundColor:  COLORS.secondaryGrey,
+      backgroundColor:  COLORS.primaryBlack,
       marginLeft: 4,
       paddingLeft: 8,
     },
@@ -77,7 +97,7 @@ const styles = StyleSheet.create({
       width:"10%",
       height: 35,
       borderRadius: 10,
-      backgroundColor: COLORS.green,
+      backgroundColor: COLORS.SecondaryBlack,
       marginRight: 4,
       justifyContent: "center",
       alignItems: "center"

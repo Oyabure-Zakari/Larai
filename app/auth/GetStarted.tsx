@@ -1,16 +1,15 @@
 import React from "react";
-import LoginUI from "@/components/login/LoginUI";
+import GetStartedUI from "@/components/login/GetStartedUI";
 import {StatusBar} from 'react-native'
 
 import { COLORS } from "@/constants/colors";
 
-export default function GoogleLogin() {
+export default function GetStarted() {
   return (
     <>
       <StatusBar backgroundColor={COLORS.backgroundGrey}/>
-      <LoginUI/>
+      <GetStartedUI/>
     </>
   );
 }
-
 

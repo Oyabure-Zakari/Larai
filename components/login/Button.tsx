@@ -1,53 +1,25 @@
-
 import React from "react";
-import { useState } from "react";
 
 import { Image, StyleSheet, Text, TouchableOpacity} from "react-native";
-
-import { auth, provider } from "@/firebaseConfig";
-import { signInWithPopup } from "firebase/auth";
 
 import { useRouter } from "expo-router";
 
 import { IMAGES } from "@/constants/images";
 import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
-import { ActivityIndicator } from "react-native";
-import { isLoading } from "expo-font";
 
 
-export default function LoginBtn() {
-  const [isLoading, setIsLoading] = useState(false)
+
+export default function Button() {
   const router = useRouter();
 
-  // const logInWithGoogle = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await signInWithPopup(auth, provider);
-  //     console.log(response);
-  //     setIsLoading(false);
-  //   } catch (error: any) {
-  //     setIsLoading(true)
-  //     console.log(error.message);
-  //     setIsLoading(false)
-  //   }
-  // };
-
-  if (isLoading) {
-    return (
-      <ActivityIndicator/>
-    )
-  }
 
   return (
     <TouchableOpacity
       style={styles.loginBtn}
       onPress={() => router.push("/(tabs)")}
-      // onPress={logInWithGoogle}
-      // disabled={isLoading}
     >
-      <Image source={IMAGES.googleIcon} style={styles.googleImg} />
-      <Text style={styles.loginText}>Login</Text>
+      <Text style={styles.loginText}>Get Started</Text>
     </TouchableOpacity>
   );
 }

@@ -15,7 +15,7 @@ export const skipButton = () => {
         title="Skip"
         buttonStyle={{ backgroundColor: COLORS.backgroundGrey, borderRadius: 10 }}
         titleStyle={{color:COLORS.primaryBlack, fontSize: FONT_SIZE.consolas.small, fontFamily: "consolas", padding: 8 }}
-        onPress={() => router.push("/auth/GoogleLogin")}
+        onPress={() => router.push("/auth/GetStarted")}
       />
     </View>
   );
@@ -39,10 +39,10 @@ export const doneButton = () => {
   return (
     <View style={styles.button}>
       <Button
-        title="Get Started"
+        title="Next"
         buttonStyle={{ backgroundColor: COLORS.primaryBlack, borderRadius: 10 }}
         titleStyle={{ fontFamily: "consolas", padding: 8 }}
-        onPress={() => router.push("/auth/GoogleLogin")}
+        onPress={() => router.push("/auth/GetStarted")}
       />
     </View>
   );

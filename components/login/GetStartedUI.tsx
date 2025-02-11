@@ -4,28 +4,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Glob from "@/components/login/Glob";
 import WriteUp from "@/components/login/WriteUp";
-import LoginBtn from "@/components/login/LoginBtn";
+import Button from "@/components/login/Button";
 import LaraiLogo from "@/components/login/LaraiLogo";
 import { StatusBar } from "react-native";
 import { COLORS } from "@/constants/colors";
 
 
-export default function LoginUI() {
+export default function GetStartedUI() {
   return (
-    <ScrollView>
-      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.topView}>
-          <LaraiLogo />
-          <Glob />
-        </View>
+    <>
+      <StatusBar backgroundColor={COLORS.backgroundGrey} />
+      <ScrollView>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.topView}>
+            <LaraiLogo />
+            <Glob />
+          </View>
 
-        <View style={styles.bottomView}>
-          <WriteUp />
-          <LoginBtn />
-        </View>
-      </SafeAreaView>
-    </ScrollView>
+          <View style={styles.bottomView}>
+            <WriteUp />
+            <Button />
+          </View>
+        </SafeAreaView>
+      </ScrollView>
+    </>
   );
 }
 
