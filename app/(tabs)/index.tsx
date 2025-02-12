@@ -29,8 +29,8 @@ export default function Dictionary() {
       url: "https://word-dictionary-api1.p.rapidapi.com/api/WordDictionaryApi/",
       params: { word: `${word}` },
       headers: {
-        "x-rapidapi-key": process.env.RAPIDAPI_KEY,
-        "x-rapidapi-host": process.env.RAPIDAPI_HOST,
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "x-rapidapi-host": RAPIDAPI_HOST,
       },
     };
 
