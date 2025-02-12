@@ -12,6 +12,8 @@ import { TouchableOpacity } from "react-native";
 import axios from "axios";
 import { FlatList } from "react-native";
 
+import {RAPIDAPI_KEY, RAPIDAPI_HOST} from "@env"
+
 type DefinitionItem = {
   definition: string;
   example: string;
@@ -27,8 +29,8 @@ export default function Dictionary() {
       url: "https://word-dictionary-api1.p.rapidapi.com/api/WordDictionaryApi/",
       params: { word: `${word}` },
       headers: {
-        "x-rapidapi-key": "bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a",
-        "x-rapidapi-host": "word-dictionary-api1.p.rapidapi.com",
+        "x-rapidapi-key": process.env.RAPIDAPI_KEY,
+        "x-rapidapi-host": process.env.RAPIDAPI_HOST,
       },
     };
 
