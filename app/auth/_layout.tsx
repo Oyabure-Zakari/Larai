@@ -7,7 +7,7 @@ export default function AuthLayout() {
 
   return (
     <Stack>
-      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
+      <StatusBar backgroundColor={COLORS.primaryGrey}/>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="GetStarted" options={{ headerShown: false}} />
     </Stack>

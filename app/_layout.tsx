@@ -25,7 +25,7 @@ export default function RootLayout() {
 
   return (
     <Stack>
-      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
+      <StatusBar backgroundColor={COLORS.primaryGrey}/>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="auth" options={{ headerShown: false }} />
     </Stack>

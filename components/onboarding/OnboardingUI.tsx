@@ -18,15 +18,15 @@ import { doneButton, nextButton, skipButton} from "./OnboardingButtons";
 export default function OnboardingUI() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="light" backgroundColor={COLORS.backgroundGrey} />
+      <StatusBar style="light" backgroundColor={COLORS.primaryGrey} />
       <Onboarding 
-        bottomBarColor={COLORS.backgroundGrey}
+        bottomBarColor={COLORS.primaryGrey}
         SkipButtonComponent={skipButton}
         NextButtonComponent={nextButton}
         DoneButtonComponent={doneButton}
         pages={[
           {
-            backgroundColor: COLORS.backgroundGrey,
+            backgroundColor: COLORS.primaryGrey,
             image: <OnboardingImage source={IMAGES.onboard1} />,
             title: <OnboardingTitle title={"Dictionary"} />,
             subtitle: <OnboardingSubtitle subTitle={
@@ -37,7 +37,7 @@ export default function OnboardingUI() {
           },
 
           {
-            backgroundColor: COLORS.backgroundGrey,
+            backgroundColor: COLORS.primaryGrey,
             image: <OnboardingImage source={IMAGES.onboard2} />,
             title: <OnboardingTitle title={"Translate"} />,
             subtitle: <OnboardingSubtitle subTitle={
@@ -47,7 +47,7 @@ export default function OnboardingUI() {
           },
 
           {
-            backgroundColor: COLORS.backgroundGrey,
+            backgroundColor: COLORS.primaryGrey,
             image: <OnboardingImage source={IMAGES.onboard3} />,
             title: <OnboardingTitle title={"Translation"} />,
             subtitle: <OnboardingSubtitle subTitle={

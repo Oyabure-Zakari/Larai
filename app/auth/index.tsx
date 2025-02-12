@@ -7,7 +7,7 @@ import OnboardingUI from "@/components/onboarding/OnboardingUI";
 export default function index() {
   return (
     <>
-      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
+      <StatusBar backgroundColor={COLORS.primaryGrey}/>
       <OnboardingUI />
     </>
   )

@@ -43,7 +43,7 @@ export default function Dictionary() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor={COLORS.backgroundGrey} />
+      <StatusBar backgroundColor={COLORS.primaryGrey} />
       <Text style={styles.text}>Dictionary</Text>
       <Text onPress={() => router.push("/auth")} style={styles.text2}>
         go to onboard

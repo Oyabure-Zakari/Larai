@@ -13,7 +13,7 @@ import { COLORS } from "@/constants/colors";
 export default function GetStartedUI() {
   return (
     <>
-      <StatusBar backgroundColor={COLORS.backgroundGrey} />
+      <StatusBar backgroundColor={COLORS.primaryGrey} />
       <ScrollView>
         <SafeAreaView style={styles.container}>
           <View style={styles.topView}>

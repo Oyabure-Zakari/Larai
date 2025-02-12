@@ -1,14 +1,11 @@
 import React from "react";
 
-import { Image, StyleSheet, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, TouchableOpacity} from "react-native";
 
 import { useRouter } from "expo-router";
 
-import { IMAGES } from "@/constants/images";
 import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
-
-
 
 export default function Button() {
   const router = useRouter();

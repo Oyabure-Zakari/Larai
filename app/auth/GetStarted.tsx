@@ -7,7 +7,7 @@ import { COLORS } from "@/constants/colors";
 export default function GetStarted() {
   return (
     <>
-      <StatusBar backgroundColor={COLORS.backgroundGrey}/>
+      <StatusBar backgroundColor={COLORS.primaryGrey}/>
       <GetStartedUI/>
     </>
   );

@@ -13,7 +13,7 @@ export const skipButton = () => {
     <View style={styles.button}>
       <Button
         title="Skip"
-        buttonStyle={{ backgroundColor: COLORS.backgroundGrey, borderRadius: 10 }}
+        buttonStyle={{ backgroundColor: COLORS.primaryGrey, borderRadius: 10 }}
         titleStyle={{color:COLORS.primaryBlack, fontSize: FONT_SIZE.consolas.small, fontFamily: "consolas", padding: 8 }}
         onPress={() => router.push("/auth/GetStarted")}
       />
