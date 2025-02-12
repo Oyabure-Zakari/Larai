@@ -36,7 +36,7 @@ export default function Dictionary() {
       const response = await axios.request(options);
       console.log(response.data[0].definitions);
       setResults(response.data[0].definitions)
-      setWord("")
+      // setWord("")
     } catch (error) {
       console.error(error);
     }
@@ -48,13 +48,15 @@ export default function Dictionary() {
       <Text onPress={() => router.push("/auth")} style={styles.text2}>
         go to onboard
       </Text>
-      {/* {results.length > 0 && <Text style={styles.exampleTitle}>Defination</Text>} */}
+
+      {results.length > 0 && <Text style={styles.exampleTitle}>{word}</Text>}
 
       <FlatList
       data={results}
       keyExtractor={(_, index) => index.toString()} // Using index since there's no unique ID
       renderItem={({ item }) => (
         <View >
+          
           <Text style={styles.definationTitle}>
             Defination
             <Text style={styles.exampleText}> • {item.definition}</Text>
