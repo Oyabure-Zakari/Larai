@@ -7,13 +7,13 @@ import { FONT_SIZE } from "@/constants/fonts";
 export default function WriteUp() {
   return (
     <>
-      <Text style={styles.title}>Simplify Your {"\n"} Login Experience!</Text>
+      <Text style={styles.title}>Welcome aboard!</Text>
 
       <View style={styles.subTitleView}>
         <Text style={styles.subTitle}>
-          " Connect with your Google account for a seamless, secure, and
-          lightning-fast way to unlock all the powerful features dictionary,
-          translation, and image to text tools right at your fingertips. "
+          " Unlock a world of words, seamless translations, and powerful
+          image-to-text scanning—all at your fingertips. Explore, learn, and
+          connect like never before. "
         </Text>
       </View>
     </>
