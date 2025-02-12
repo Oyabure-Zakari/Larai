@@ -6,4 +6,5 @@ export const IMAGES = {
   icon: require("../assets/images/icon.png"),
   googleIcon: require("../assets/images/google icon.png"),
   laraiLogo: require("../assets/images/adaptive-icon.png"),
+  laraiLogo2: require("../assets/images/splash-icon.png"),
 }
