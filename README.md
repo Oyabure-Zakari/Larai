@@ -1,6 +1,8 @@
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+
 # Welcome to Larai 📖
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Introducing [App Name], your ultimate language companion! Expand your vocabulary effortlessly and unlock a world of understanding with our innovative app.
 
 1. #### Unlock the meaning of every word with ease
 
