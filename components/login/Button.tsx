@@ -16,7 +16,7 @@ export default function Button() {
       style={styles.loginBtn}
       onPress={() => router.push("/(tabs)")}
     >
-      <Text style={styles.loginText}>Let's get started</Text>
+      <Text style={styles.loginText}>Get started</Text>
     </TouchableOpacity>
   );
 }
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor:  COLORS.primaryBlack,
+    backgroundColor:  COLORS.backgroundColor,
   },
 
   googleImg: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   loginText: {
     textAlign: "center",
     fontFamily: "consolas",
-    color: COLORS.secondaryGrey,
+    color: COLORS.green,
     fontSize: FONT_SIZE.consolas.small,
   },
 });

@@ -12,7 +12,7 @@ export default function WriteUp() {
       <View style={styles.subTitleView}>
         <Text style={styles.subTitle}>
           " Unlock a world of words, seamless translations, and powerful
-          image-to-text scanning—all at your fingertips. Explore, learn, and
+          image-to-text scanning all at your fingertips. Explore, learn, and
           connect like never before. "
         </Text>
       </View>

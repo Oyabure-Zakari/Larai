@@ -14,7 +14,7 @@ export const skipButton = () => {
       <Button
         title="Skip"
         buttonStyle={{ backgroundColor: COLORS.primaryGrey, borderRadius: 10 }}
-        titleStyle={{color:COLORS.primaryBlack, fontSize: FONT_SIZE.consolas.small, fontFamily: "consolas", padding: 8 }}
+        titleStyle={{color:COLORS.backgroundColor, fontSize: FONT_SIZE.consolas.small, fontFamily: "consolas", padding: 8 }}
         onPress={() => router.push("/auth/GetStarted")}
       />
     </View>
@@ -26,8 +26,8 @@ export const nextButton = ({ ...props }) => {
     <View style={styles.button}>
       <Button
         title="Next"
-        buttonStyle={{ backgroundColor: COLORS.primaryBlack, borderRadius: 10 }}
-        titleStyle={{ fontFamily: "consolas", padding: 8 }}
+        buttonStyle={{ backgroundColor: COLORS.green, borderRadius: 10 }}
+        titleStyle={{color:COLORS.backgroundColor, fontFamily: "consolas", padding: 8 }}
         {...props}
       />
     </View>
@@ -40,8 +40,8 @@ export const doneButton = () => {
     <View style={styles.button}>
       <Button
         title="Next"
-        buttonStyle={{ backgroundColor: COLORS.primaryBlack, borderRadius: 10 }}
-        titleStyle={{ fontFamily: "consolas", padding: 8 }}
+        buttonStyle={{ backgroundColor: COLORS.green, borderRadius: 10 }}
+        titleStyle={{color:COLORS.backgroundColor, fontFamily: "consolas", padding: 8 }}
         onPress={() => router.push("/auth/GetStarted")}
       />
     </View>

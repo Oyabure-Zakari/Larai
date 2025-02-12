@@ -74,14 +74,14 @@ export default function Dictionary() {
         <TextInput
           style={styles.textInput}
           placeholder="dictionary"
-          placeholderTextColor={COLORS.SecondaryBlack}
+          placeholderTextColor="grey"
           value={word}
           onChangeText={setWord}
           multiline
         />
 
         <TouchableOpacity style={styles.sendBtn} onPress={sendDictionary}>
-          <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
+          <Ionicons name="send" size={20} color={COLORS.backgroundColor} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    // backgroundColor:  "red",
+    //backgroundColor:  "red",
+    paddingHorizontal:4
   },
   
   definationTitle: {
