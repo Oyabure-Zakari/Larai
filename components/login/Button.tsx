@@ -16,7 +16,7 @@ export default function Button() {
       style={styles.loginBtn}
       onPress={() => router.push("/(tabs)")}
     >
-      <Text style={styles.loginText}>Get Started</Text>
+      <Text style={styles.loginText}>Let's get started</Text>
     </TouchableOpacity>
   );
 }
