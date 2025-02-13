@@ -1,18 +1,22 @@
-import { StatusBar, Platform, StyleSheet, Text } from "react-native";
+import { StatusBar, Platform, StyleSheet, Text, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
-import { FONT_SIZE } from "@/constants/fonts";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+
+import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
-import { View } from "react-native";
-import { TextInput } from "react-native";
+
+import { View, TouchableOpacity, TextInput } from "react-native";
+import {  } from "react-native";
+
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 
 import axios from "axios";
-import { FlatList } from "react-native";
-import { ActivityIndicator } from "react-native";
 
+import DictionaryList from "@/components/dictionary/DictionaryList";
+
+// type for the api results
 type ResultsType = {
   definition: string;
   example: string;
@@ -23,7 +27,8 @@ export default function Dictionary() {
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<ResultsType[]>([]);
   const router = useRouter();
-  const sendDictionary = async () => {
+
+  const sendWord = async () => {
     setIsLoading(true);
 
     const options = {
@@ -56,28 +61,7 @@ export default function Dictionary() {
 
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
-      <FlatList
-        data={results}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(_, index) => index.toString()} // Using index since there's no unique ID
-        renderItem={({ item }) => (
-          <View style={styles.flatListView}>
-            <View style={styles.definitionView}>
-              <Text style={styles.definitionTitle}>Definition</Text>
-              <Text style={styles.definitionText}>{item.definition}</Text>
-            </View>
-
-            {item.example.trim() !== "" && (
-              <>
-                <View style={styles.exampleView}>
-                  <Text style={styles.exampleTitle}>Example</Text>
-                  <Text style={styles.exampleText}>• {item.example}</Text>
-                </View>
-              </>
-            )}
-          </View>
-        )}
-      />
+      <DictionaryList results={results}/>
 
       <View style={styles.textAndButtonView}>
         <TextInput
@@ -89,7 +73,7 @@ export default function Dictionary() {
         />
 
         {word.length > 0 && (
-          <TouchableOpacity style={styles.sendBtn} onPress={sendDictionary}>
+          <TouchableOpacity style={styles.sendBtn} onPress={sendWord}>
             <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
           </TouchableOpacity>
         )}
@@ -121,50 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 4,
-  },
-
-  flatListView: {
-    paddingHorizontal: 6,
-  },
-
-  definitionView: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 12,
-    borderRadius: 10,
-    backgroundColor: COLORS.backgroundColor,
-  },
-
-  definitionTitle: {
-    fontFamily: "segoeui_blackItalic",
-    color: COLORS.green,
-    fontSize: FONT_SIZE.mainText_Seoge.small,
-  },
-
-  definitionText: {
-    fontFamily: "consolas",
-    color: COLORS.secondaryGrey,
-    fontSize: FONT_SIZE.consolas.small,
-  },
-
-  exampleView: {
-    width: "100%",
-    borderRadius: 10,
-    paddingHorizontal: 10,
-  },
-
-  exampleTitle: {
-    marginTop: 10,
-    fontFamily: "segoeui_blackItalic",
-    color: COLORS.primaryBlack,
-    fontSize: FONT_SIZE.mainText_Seoge.small,
-  },
-
-  exampleText: {
-    fontFamily: "consolas",
-    color: COLORS.SecondaryBlack,
-    fontSize: FONT_SIZE.mainText_Seoge.small,
-    paddingBottom: 20,
   },
 
   textInput: {
