@@ -13,7 +13,7 @@ import axios from "axios";
 import { FlatList } from "react-native";
 import { ActivityIndicator } from "react-native";
 
-type DefinitionItem = {
+type ResultsType = {
   definition: string;
   example: string;
 };
@@ -21,7 +21,7 @@ type DefinitionItem = {
 export default function Dictionary() {
   const [word, setWord] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState<DefinitionItem[]>([]);
+  const [results, setResults] = useState<ResultsType[]>([]);
   const router = useRouter();
   const sendDictionary = async () => {
     setIsLoading(true);
