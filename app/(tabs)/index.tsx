@@ -11,8 +11,7 @@ import { TouchableOpacity } from "react-native";
 
 import axios from "axios";
 import { FlatList } from "react-native";
-
-import {RAPIDAPI_KEY, RAPIDAPI_HOST} from "@env"
+import { ActivityIndicator } from "react-native";
 
 type DefinitionItem = {
   definition: string;
@@ -21,70 +20,79 @@ type DefinitionItem = {
 
 export default function Dictionary() {
   const [word, setWord] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<DefinitionItem[]>([]);
   const router = useRouter();
   const sendDictionary = async () => {
+    setIsLoading(true);
+
     const options = {
       method: "GET",
       url: "https://word-dictionary-api1.p.rapidapi.com/api/WordDictionaryApi/",
       params: { word: `${word}` },
       headers: {
-        "x-rapidapi-key": RAPIDAPI_KEY,
-        "x-rapidapi-host": RAPIDAPI_HOST,
+        "x-rapidapi-key": "bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a",
+        "x-rapidapi-host": "word-dictionary-api1.p.rapidapi.com",
       },
     };
 
     try {
       const response = await axios.request(options);
       console.log(response.data[0].definitions);
-      setResults(response.data[0].definitions)
-      // setWord("")
+      setResults(response.data[0].definitions);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primaryGrey} />
-      <Text style={styles.text}>Dictionary</Text>
-      <Text onPress={() => router.push("/auth")} style={styles.text2}>
-        go to onboard
+      <Text style={styles.text} onPress={() => router.push("/auth")}>
+        {results.length > 0 ? word : "Dictionary"}
       </Text>
 
-      {results.length > 0 && <Text style={styles.exampleTitle}>{word}</Text>}
+      {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
       <FlatList
-      data={results}
-      keyExtractor={(_, index) => index.toString()} // Using index since there's no unique ID
-      renderItem={({ item }) => (
-        <View >
-          
-          <Text style={styles.definationTitle}>
-            Defination
-            <Text style={styles.exampleText}> • {item.definition}</Text>
-          </Text>
-          {item.example.trim() !== '' && (
-            <>
-            <Text style={styles.exampleTitle}>Example</Text>
-            <Text style={styles.exampleText}>{item.example}</Text></>
-          )}
-        </View>
-      )}
-    />
+        data={results}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(_, index) => index.toString()} // Using index since there's no unique ID
+        renderItem={({ item }) => (
+          <View style={styles.flatListView}>
+            <View style={styles.definitionView}>
+              <Text style={styles.definitionTitle}>Definition</Text>
+              <Text style={styles.definitionText}>{item.definition}</Text>
+            </View>
 
-      <View style={styles.back}>
+            {item.example.trim() !== "" && (
+              <>
+                <View style={styles.exampleView}>
+                  <Text style={styles.exampleTitle}>Example</Text>
+                  <Text style={styles.exampleText}>• {item.example}</Text>
+                </View>
+              </>
+            )}
+          </View>
+        )}
+      />
+
+      <View style={styles.textAndButtonView}>
         <TextInput
           style={styles.textInput}
           placeholder="dictionary"
           placeholderTextColor="grey"
           value={word}
           onChangeText={setWord}
-          multiline
         />
 
-        <TouchableOpacity style={styles.sendBtn} onPress={sendDictionary}>
-          <Ionicons name="send" size={20} color={COLORS.backgroundColor} />
-        </TouchableOpacity>
+        {word.length > 0 && (
+          <TouchableOpacity style={styles.sendBtn} onPress={sendDictionary}>
+            <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -101,14 +109,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE.mainText_Seoge.large,
     fontFamily: "segoeui_bold",
+    paddingVertical: 10,
   },
 
-  text2: {
-    fontSize: FONT_SIZE.mainText_Seoge.small,
-    fontFamily: "Consolas",
-  },
-
-  back: {
+  textAndButtonView: {
     gap: 10,
     // height: 45,
     width: "100%",
@@ -116,16 +120,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    //backgroundColor:  "red",
-    paddingHorizontal:4
+    paddingHorizontal: 4,
   },
-  
-  definationTitle: {
-    marginTop: 10,
+
+  flatListView: {
+    paddingHorizontal: 6,
+  },
+
+  definitionView: {
+    width: "100%",
+    padding: 10,
+    marginBottom: 12,
+    borderRadius: 10,
+    backgroundColor: COLORS.backgroundColor,
+  },
+
+  definitionTitle: {
     fontFamily: "segoeui_blackItalic",
-    // color: COLORS.primaryBlack,
     color: COLORS.green,
     fontSize: FONT_SIZE.mainText_Seoge.small,
+  },
+
+  definitionText: {
+    fontFamily: "consolas",
+    color: COLORS.secondaryGrey,
+    fontSize: FONT_SIZE.consolas.small,
+  },
+
+  exampleView: {
+    width: "100%",
+    borderRadius: 10,
+    paddingHorizontal: 10,
   },
 
   exampleTitle: {
@@ -139,6 +164,7 @@ const styles = StyleSheet.create({
     fontFamily: "consolas",
     color: COLORS.SecondaryBlack,
     fontSize: FONT_SIZE.mainText_Seoge.small,
+    paddingBottom: 20,
   },
 
   textInput: {

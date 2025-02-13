@@ -27,7 +27,7 @@ export const nextButton = ({ ...props }) => {
       <Button
         title="Next"
         buttonStyle={{ backgroundColor: COLORS.green, borderRadius: 10 }}
-        titleStyle={{color:COLORS.backgroundColor, fontFamily: "consolas", padding: 8 }}
+        titleStyle={{color:COLORS.backgroundColor, fontFamily: "segoeui_blackItalic", padding: 2, fontSize: FONT_SIZE.consolas.small}}
         {...props}
       />
     </View>
@@ -41,7 +41,7 @@ export const doneButton = () => {
       <Button
         title="Next"
         buttonStyle={{ backgroundColor: COLORS.green, borderRadius: 10 }}
-        titleStyle={{color:COLORS.backgroundColor, fontFamily: "consolas", padding: 8 }}
+        titleStyle={{color:COLORS.backgroundColor, fontFamily: "segoeui_blackItalic", padding: 2, fontSize: FONT_SIZE.consolas.small }}
         onPress={() => router.push("/auth/GetStarted")}
       />
     </View>

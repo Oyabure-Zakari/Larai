@@ -8,6 +8,7 @@ import Button from "@/components/login/Button";
 import LaraiLogo from "@/components/login/LaraiLogo";
 import { StatusBar } from "react-native";
 import { COLORS } from "@/constants/colors";
+import { Platform } from "react-native";
 
 
 export default function GetStartedUI() {
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
   topView: {
