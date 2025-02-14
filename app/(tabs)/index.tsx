@@ -16,6 +16,7 @@ import axios from "axios";
 
 import DictionaryList from "@/components/dictionary/DictionaryList";
 import { Alert } from "react-native";
+import { useDictionaryStore } from "@/store/useDictionaryStore";
 
 // type for the api results
 type ResultsType = {
@@ -24,37 +25,14 @@ type ResultsType = {
 };
 
 export default function Dictionary() {
-  const [word, setWord] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState<ResultsType[]>([]);
   const router = useRouter();
 
-  const sendWord = async () => {
-    setIsLoading(true);
-
-    const options = {
-      method: "GET",
-      url: "https://word-dictionary-api1.p.rapidapi.com/api/WordDictionaryApi/",
-      params: { word: `${word}` },
-      headers: {
-        "x-rapidapi-key": "bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a",
-        "x-rapidapi-host": "word-dictionary-api1.p.rapidapi.com",
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      console.log(response.data[0].definitions);
-      setResults(response.data[0].definitions);
-      setError("")
-      setIsLoading(false);
-    } catch (error:any) {
-      console.error(error.message);
-      setError(error.message);
-      setIsLoading(false);
-    }
-  };
+  const word = useDictionaryStore((state) => state.word);
+  const setWord = useDictionaryStore((state) => state.setWord);
+  const error = useDictionaryStore((state) => state.error);
+  const results = useDictionaryStore((state) => state.results);
+  const isLoading = useDictionaryStore((state) => state.isLoading);
+  const sendWord = useDictionaryStore((state) => state.sendWord);
 
   useEffect(() => {
     error !== "" && Alert.alert("Error",error, [{text: "OK"}])
@@ -81,7 +59,7 @@ export default function Dictionary() {
         />
 
         {word.length > 0 && (
-          <TouchableOpacity style={styles.sendBtn} onPress={sendWord}>
+          <TouchableOpacity style={styles.sendBtn} onPress={() => sendWord(word)}>
             <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
           </TouchableOpacity>
         )}
