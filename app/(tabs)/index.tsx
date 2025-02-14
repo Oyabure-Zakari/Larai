@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { StatusBar, Platform, StyleSheet, ActivityIndicator, View, TextInput, Alert } from "react-native";
+import { StatusBar, Platform, StyleSheet, ActivityIndicator, View, Alert } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -9,13 +9,12 @@ import { COLORS } from "@/constants/colors";
 import DictionaryList from "@/components/dictionary/DictionaryList";
 import SendWordBtn from "@/components/dictionary/SendWordBtn";
 import HeaderText from "@/components/dictionary/HeaderText";
+import TextField from "@/components/dictionary/TextField";
 
 import { useDictionaryStore } from "@/store/useDictionaryStore";
 
-
 export default function Dictionary() {
   const word = useDictionaryStore((state) => state.word);
-  const setWord = useDictionaryStore((state) => state.setWord);
   const error = useDictionaryStore((state) => state.error);
   const isLoading = useDictionaryStore((state) => state.isLoading);
 
@@ -34,13 +33,7 @@ export default function Dictionary() {
       <DictionaryList/>
 
       <View style={styles.textAndButtonView}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="dictionary"
-          placeholderTextColor="grey"
-          value={word}
-          onChangeText={setWord}
-        />
+        <TextField/>
 
         {word.length > 0 && <SendWordBtn/>}
       </View>
@@ -65,14 +58,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 4,
-  },
-
-  textInput: {
-    width: "85%",
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: COLORS.secondaryGrey,
-    marginLeft: 4,
-    paddingLeft: 8,
   },
 });
