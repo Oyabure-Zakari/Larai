@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 
 import DictionaryList from "@/components/dictionary/DictionaryList";
+import { Alert } from "react-native";
 
 // type for the api results
 type ResultsType = {
@@ -24,6 +25,7 @@ type ResultsType = {
 
 export default function Dictionary() {
   const [word, setWord] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<ResultsType[]>([]);
   const router = useRouter();
@@ -45,9 +47,11 @@ export default function Dictionary() {
       const response = await axios.request(options);
       console.log(response.data[0].definitions);
       setResults(response.data[0].definitions);
+      setError("")
       setIsLoading(false);
-    } catch (error) {
-      console.error(error);
+    } catch (error:any) {
+      console.error(error.message);
+      setError(error.message);
       setIsLoading(false);
     }
   };
@@ -58,6 +62,8 @@ export default function Dictionary() {
       <Text style={styles.text} onPress={() => router.push("/auth")}>
         {results.length > 0 ? word : "Dictionary"}
       </Text>
+
+      
 
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
