@@ -37,7 +37,7 @@ export default function Dictionary() {
 
       {/* displays the result of the searched word */}
       <DictionaryList />
-      
+
       {/* textInput and send button */}
       <TextFieldAndButton />
     </SafeAreaView>

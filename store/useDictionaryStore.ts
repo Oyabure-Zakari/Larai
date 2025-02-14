@@ -1,6 +1,8 @@
 import {create} from "zustand";
 import axios from "axios";
 
+import { DICTIONARY_API_URL, DICTIONARY_RAPID_API_KEY, DICTIONARY_RAPID_API_HOST } from "@env";
+
 type ResultsType = {
   definition: string;
   example: string;
@@ -27,11 +29,11 @@ export const useDictionaryStore = create<InitialState>((set) => ({
 
     const options = {
       method: "GET",
-      url: "https://word-dictionary-api1.p.rapidapi.com/api/WordDictionaryApi/",
+      url: DICTIONARY_API_URL,
       params: { word: `${word}` },
       headers: {
-        "x-rapidapi-key": "bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a",
-        "x-rapidapi-host": "word-dictionary-api1.p.rapidapi.com",
+        "x-rapidapi-key": DICTIONARY_RAPID_API_KEY,
+        "x-rapidapi-host": DICTIONARY_RAPID_API_HOST,
       },
     };
 
