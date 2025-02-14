@@ -1,5 +1,5 @@
-import { StatusBar, Platform, StyleSheet, Text, ActivityIndicator } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { StatusBar, Platform, StyleSheet, Text, ActivityIndicator, View, TextInput, Alert } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -7,22 +7,10 @@ import { useRouter } from "expo-router";
 import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
 
-import { View, TouchableOpacity, TextInput } from "react-native";
-import {  } from "react-native";
-
-import { Ionicons } from "@expo/vector-icons";
-
-import axios from "axios";
-
 import DictionaryList from "@/components/dictionary/DictionaryList";
-import { Alert } from "react-native";
-import { useDictionaryStore } from "@/store/useDictionaryStore";
 
-// type for the api results
-type ResultsType = {
-  definition: string;
-  example: string;
-};
+import { useDictionaryStore } from "@/store/useDictionaryStore";
+import SendWordBtn from "@/components/dictionary/SendWordBtn";
 
 export default function Dictionary() {
   const router = useRouter();
@@ -32,7 +20,6 @@ export default function Dictionary() {
   const error = useDictionaryStore((state) => state.error);
   const results = useDictionaryStore((state) => state.results);
   const isLoading = useDictionaryStore((state) => state.isLoading);
-  const sendWord = useDictionaryStore((state) => state.sendWord);
 
   useEffect(() => {
     error !== "" && Alert.alert("Error",error, [{text: "OK"}])
@@ -47,7 +34,7 @@ export default function Dictionary() {
 
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
-      <DictionaryList results={results}/>
+      <DictionaryList/>
 
       <View style={styles.textAndButtonView}>
         <TextInput
@@ -58,11 +45,7 @@ export default function Dictionary() {
           onChangeText={setWord}
         />
 
-        {word.length > 0 && (
-          <TouchableOpacity style={styles.sendBtn} onPress={() => sendWord(word)}>
-            <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
-          </TouchableOpacity>
-        )}
+        {word.length > 0 && ( <SendWordBtn/>)}
       </View>
     </SafeAreaView>
   );
@@ -100,15 +83,5 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.secondaryGrey,
     marginLeft: 4,
     paddingLeft: 8,
-  },
-
-  sendBtn: {
-    width: "10%",
-    height: 35,
-    borderRadius: 10,
-    backgroundColor: COLORS.green,
-    marginRight: 4,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

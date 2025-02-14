@@ -1,17 +1,10 @@
 import React from "react";
 import { FlatList} from "react-native";
 import RenderList from "./RenderList";
+import { useDictionaryStore } from "@/store/useDictionaryStore";
 
-type ResultsType = {
-  definition: string;
-  example: string;
-};
-
-type DictionaryListProps = {
-  results: ResultsType[];
-};
-
-export default function DictionaryList({ results }:DictionaryListProps) {
+export default function DictionaryList() {
+  const results = useDictionaryStore((state) => state.results);
   return (
     <FlatList
       data={results}
