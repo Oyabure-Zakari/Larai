@@ -1,5 +1,5 @@
 import { StatusBar, Platform, StyleSheet, Text, ActivityIndicator } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -56,14 +56,16 @@ export default function Dictionary() {
     }
   };
 
+  useEffect(() => {
+    error !== "" && Alert.alert("Error",error, [{text: "OK"}])
+  }, [error])
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primaryGrey} />
       <Text style={styles.text} onPress={() => router.push("/auth")}>
         {results.length > 0 ? word : "Dictionary"}
       </Text>
-
-      
 
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
