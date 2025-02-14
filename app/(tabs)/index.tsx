@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
-import { StatusBar, Platform, StyleSheet, Text, ActivityIndicator, View, TextInput, Alert } from "react-native";
+import React from "react";
+import { useEffect } from "react";
+import { StatusBar, Platform, StyleSheet, ActivityIndicator, View, TextInput, Alert } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
 
-import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
 
 import DictionaryList from "@/components/dictionary/DictionaryList";
+import SendWordBtn from "@/components/dictionary/SendWordBtn";
+import HeaderText from "@/components/dictionary/HeaderText";
 
 import { useDictionaryStore } from "@/store/useDictionaryStore";
-import SendWordBtn from "@/components/dictionary/SendWordBtn";
+
 
 export default function Dictionary() {
-  const router = useRouter();
-
   const word = useDictionaryStore((state) => state.word);
   const setWord = useDictionaryStore((state) => state.setWord);
   const error = useDictionaryStore((state) => state.error);
-  const results = useDictionaryStore((state) => state.results);
   const isLoading = useDictionaryStore((state) => state.isLoading);
 
   useEffect(() => {
@@ -28,9 +26,8 @@ export default function Dictionary() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primaryGrey} />
-      <Text style={styles.text} onPress={() => router.push("/auth")}>
-        {results.length > 0 ? word : "Dictionary"}
-      </Text>
+
+      <HeaderText/>
 
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
@@ -45,7 +42,7 @@ export default function Dictionary() {
           onChangeText={setWord}
         />
 
-        {word.length > 0 && ( <SendWordBtn/>)}
+        {word.length > 0 && <SendWordBtn/>}
       </View>
     </SafeAreaView>
   );
@@ -57,12 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-
-  text: {
-    fontSize: FONT_SIZE.mainText_Seoge.large,
-    fontFamily: "segoeui_bold",
-    paddingVertical: 10,
   },
 
   textAndButtonView: {
