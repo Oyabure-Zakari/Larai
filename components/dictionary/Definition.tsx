@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
+// coming from RenderList Component
 type DefinitionProps = {
   definition: string;
 };

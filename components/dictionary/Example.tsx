@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
 
+// coming from RenderList Component
 type ExampleProps = {
   example: string;
 };

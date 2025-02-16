@@ -7,21 +7,9 @@ import {
   DICTIONARY_RAPID_API_HOST,
 } from "@env";
 
-type ResultsType = {
-  definition: string;
-  example: string;
-};
+import { DictionaryStore } from "@/types";
 
-type InitialState = {
-  word: string;
-  error: any;
-  results: ResultsType[];
-  isLoading: boolean;
-  setWord: (word: string) => void;
-  sendWord: (word: string) => Promise<void>;
-};
-
-export const useDictionaryStore = create<InitialState>((set) => ({
+export const useDictionaryStore = create<DictionaryStore>((set) => ({
   word: "",
   error: "",
   results: [],

@@ -3,14 +3,11 @@ import { StyleSheet, View } from "react-native";
 
 import Definition from "./Definition";
 import Example from "./Example";
+import { DictionaryResultsType } from "@/types";
 
-type ResultsType = {
-  definition: string;
-  example: string;
-};
-
+// coming from DictionaryList Component
 type RenderListProps = {
-  item: ResultsType;
+  item: DictionaryResultsType;
 };
 
 export default function RenderList({ item }: RenderListProps) {
