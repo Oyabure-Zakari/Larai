@@ -30,7 +30,7 @@ export default function TabsLayout() {
         }}
       />
 
-      <Tabs.Screen 
+      {/* <Tabs.Screen 
         name="Translate" 
         options={{ 
           tabBarLabel:"Image to Text",
@@ -42,7 +42,7 @@ export default function TabsLayout() {
             />
           ),
         }} 
-      />
+      /> */}
 
       <Tabs.Screen
         name="Translation"
