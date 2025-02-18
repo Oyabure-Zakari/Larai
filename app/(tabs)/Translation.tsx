@@ -13,6 +13,7 @@ import axios from "axios";
 
 import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native";
+import { TRANSLATION_API_URL, TRANSLATION_RAPID_API_HOST, TRANSLATION_RAPID_API_KEY } from "@env";
 
 export default function Translation() {
   const [word, setWord] = useState("");
@@ -28,15 +29,15 @@ export default function Translation() {
   const sendBtn = async () => {
     const options = {
       method: "POST",
-      url: "https://free-google-translator.p.rapidapi.com/external-api/free-google-translator",
+      url: TRANSLATION_API_URL,
       params: {
         from: translateFrom,
         to: translateTo,
         query: word,
       },
       headers: {
-        "x-rapidapi-key": "bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a",
-        "x-rapidapi-host": "free-google-translator.p.rapidapi.com",
+        "x-rapidapi-key": TRANSLATION_RAPID_API_KEY,
+        "x-rapidapi-host": TRANSLATION_RAPID_API_HOST,
         "Content-Type": "application/json",
       },
       data: {
