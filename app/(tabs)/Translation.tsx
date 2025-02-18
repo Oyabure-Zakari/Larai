@@ -12,6 +12,7 @@ import { TouchableOpacity } from "react-native";
 import axios from "axios";
 
 import { Picker } from "@react-native-picker/picker";
+import { transform } from "@babel/core";
 
 export default function Translation() {
   const [word, setWord] = useState("");
@@ -53,8 +54,9 @@ export default function Translation() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Translation</Text>
 
-      <Text>Translation From</Text>
       {/* translate from */}
+      <View style={styles.translateFromView}>
+      <Text style={styles.text2}>From: </Text>
       <Picker
         selectedValue={translateFrom}
         onValueChange={(value) => setTranslateFrom(value)}
@@ -87,10 +89,12 @@ export default function Translation() {
         <Picker.Item label="Greek 🇬🇷" value="el" />
         <Picker.Item label="Hebrew 🇮🇱" value="he" />
       </Picker>
+      </View>
 
-      <Text>Translation To</Text>
 
       {/* translate to */}
+      <View style={styles.translateToView}>
+      <Text style={styles.text2}>To: </Text>
             <Picker
         selectedValue={translateTo}
         onValueChange={(value) => setTranslateTo(value)}
@@ -123,6 +127,8 @@ export default function Translation() {
         <Picker.Item label="Greek 🇬🇷" value="el" />
         <Picker.Item label="Hebrew 🇮🇱" value="he" />
       </Picker>
+      </View>
+      
 
       <Text>{query}</Text>
 
@@ -153,13 +159,39 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
+  translateFromView: { 
+    gap: 4,
+    marginTop: 40,
+    height: 40,
+    width: '95%',
+    alignItems: "center",
+    flexDirection: "row",
+  },
+
+  translateToView: { 
+    gap: 25,
+    height: 40,
+    width: '95%',
+    marginTop: 40,
+    alignItems: "center",
+    flexDirection: "row",
+  },
+
   picker: { 
-    paddingVertical: 20,
-    width: '100%' },
+    height: 60,
+    width: "80%",
+    marginLeft: 10,
+    backgroundColor: COLORS.secondaryGrey,
+  },
 
   text: {
     fontSize: FONT_SIZE.mainText_Seoge.large,
     fontFamily: "segoeui_bold",
+  },
+
+  text2: {
+    fontSize: 15,
+    fontFamily: "segoeui_blackItalic",
   },
 
   textAndButtonView: {
