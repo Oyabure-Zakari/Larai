@@ -1,21 +1,38 @@
-import { StyleSheet, Text} from 'react-native'
-import React from 'react'
-import { FONT_SIZE } from '@/constants/fonts'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { View } from 'react-native'
-import { Platform } from 'react-native'
-import { StatusBar } from 'react-native'
+import { StyleSheet, Text } from "react-native";
+import React, { useState } from "react";
+import { FONT_SIZE } from "@/constants/fonts";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
+import { Platform } from "react-native";
+import { StatusBar } from "react-native";
+import { TextInput } from "react-native";
+import { COLORS } from "@/constants/colors";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 export default function Translation() {
+  const [translation, setTranslation] = useState("");
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Translation</Text>
 
-          <View style={styles.textAndButtonView}>
+      <View style={styles.textAndButtonView}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="dictionary"
+          placeholderTextColor="grey"
+          value={translation}
+          onChangeText={setTranslation}
+        />
 
-          </View>
+<TouchableOpacity style={styles.sendBtn}>
+      <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
+    </TouchableOpacity>
+      </View>
+
+
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -28,7 +45,7 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: FONT_SIZE.mainText_Seoge.large,
-    fontFamily: "segoeui_bold"
+    fontFamily: "segoeui_bold",
   },
 
   textAndButtonView: {
@@ -40,5 +57,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 4,
+    backgroundColor: "red",
+
   },
-})
+
+  textInput: {
+    width: "85%",
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: COLORS.secondaryGrey,
+    marginLeft: 4,
+    paddingLeft: 8,
+  },
+
+  sendBtn: {
+    width: "10%",
+    height: 35,
+    borderRadius: 10,
+    backgroundColor: COLORS.green,
+    marginRight: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
