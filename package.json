@@ -21,14 +21,14 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@types/react-native-onboarding-swiper": "^1.1.9",
     "axios": "^1.7.9",
-    "expo": "~52.0.32",
+    "expo": "~52.0.35",
     "expo-blur": "~14.0.3",
-    "expo-constants": "~17.0.5",
+    "expo-constants": "~17.0.6",
     "expo-font": "~13.0.3",
     "expo-haptics": "~14.0.1",
     "expo-linking": "~7.0.5",
     "expo-router": "~4.0.17",
-    "expo-splash-screen": "~0.29.21",
+    "expo-splash-screen": "~0.29.22",
     "expo-status-bar": "~2.0.1",
     "expo-symbols": "^0.2.2",
     "expo-system-ui": "~4.0.8",
@@ -45,7 +45,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "jest-expo": "~52.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
