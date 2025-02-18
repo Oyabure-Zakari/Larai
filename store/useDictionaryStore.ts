@@ -7,9 +7,9 @@ import {
   DICTIONARY_RAPID_API_HOST,
 } from "@env";
 
-import { DictionaryStore } from "@/types";
+import { DictionaryStoreType } from "@/types";
 
-export const useDictionaryStore = create<DictionaryStore>((set) => ({
+export const useDictionaryStore = create<DictionaryStoreType>((set) => ({
   word: "",
   error: "",
   results: [],

@@ -5,7 +5,7 @@ export type DictionaryResultsType = {
 };
 
 // type for the useDictionaryStore
-export type DictionaryStore = {
+export type DictionaryStoreType = {
   word: string;
   error: any;
   results: DictionaryResultsType[];
