@@ -4,6 +4,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 Introducing Larai, your ultimate language companion! Expand your vocabulary effortlessly and unlock a world of understanding with our innovative app.
 
+![Larai-App](https://raw.githubusercontent.com/Oyabure-Zakari/Larai/refs/heads/main/Larai%20App%20Screen.png)
+
 1. #### Unlock the meaning of every word with ease
 
    Your personal dictionary is now at your fingertips, ready to help you explore definitions, synonyms, and expand your vocabulary effortlessly.
