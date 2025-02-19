@@ -22,7 +22,7 @@ export default function Translation() {
   const [query, setQuery] = useState("");
   const [translation, setTranslation] = useState("");
 
-  // select langugages state
+  // select languages state
   const [translateFrom, setTranslateFrom] = useState("");
   const [translateTo, setTranslateTo] = useState("");
 
@@ -151,7 +151,7 @@ export default function Translation() {
       <View style={styles.textAndButtonView}>
           <TextInput
             style={styles.textInput}
-            multiline
+            multiline={true}
             placeholder="dictionary"
             placeholderTextColor="grey"
             value={word}
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
 
   queryView: {
     padding: 20,
-    width:"95%",
+    width:"90%",
     marginTop: 20,
     marginLeft: 16,
     alignSelf: "flex-end",
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
 
   translationView: {
     padding: 20,
-    width:"95%",
+    width:"90%",
     marginTop: 20,
     marginLeft: 16,
     alignSelf: "flex-start",
