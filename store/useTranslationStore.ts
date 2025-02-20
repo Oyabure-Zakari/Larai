@@ -7,25 +7,7 @@ import {
   TRANSLATION_RAPID_API_KEY,
 } from "@env";
 
-type useTranslationStoreType = {
-  word: string;
-  query: string;
-  translation: string;
-  isLoading: boolean;
-  translateFrom: string;
-  translateTo: string;
-  error: any;
-
-  setWord: (word: string) => void;
-  setTranslateFrom: (translateFrom: string) => void;
-  setTranslateTo: (translateTo: string) => void;
-
-  sendBtn: (
-    word: string,
-    translateTo: string,
-    translateFrom: string
-  ) => Promise<void>;
-};
+import { useTranslationStoreType } from "@/types";
 
 export const useTranslationStore = create<useTranslationStoreType>((set) => ({
   word: "",
@@ -39,7 +21,7 @@ export const useTranslationStore = create<useTranslationStoreType>((set) => ({
   setTranslateFrom: (translateFrom: string) => set({translateFrom}),
   setTranslateTo: (translateTo: string) => set({translateTo}),
 
-  sendBtn: async (word, translateTo, translateFrom) => {
+  translateBtn: async (word, translateTo, translateFrom) => {
     const options = {
       method: "POST",
       url: TRANSLATION_API_URL,

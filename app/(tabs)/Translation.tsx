@@ -27,7 +27,7 @@ export default function Translation() {
   const setTranslateFrom = useTranslationStore((state) => state.setTranslateFrom);
   const setTranslateTo = useTranslationStore((state) => state.setTranslateTo);
 
-  const sendBtn = useTranslationStore((state) => state.sendBtn);
+  const translateBtn = useTranslationStore((state) => state.translateBtn);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -131,7 +131,7 @@ export default function Translation() {
             onChangeText={setWord}
           />
 
-          <TouchableOpacity style={styles.sendBtn} onPress={() => sendBtn (word, translateFrom, translateTo)}>
+          <TouchableOpacity style={styles.sendBtn} onPress={() => translateBtn (word, translateFrom, translateTo)}>
             <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
           </TouchableOpacity>
         </View>
