@@ -13,6 +13,7 @@ import { TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native";
 import { useTranslationStore } from "@/store/useTranslationStore";
+import { ActivityIndicator } from "react-native";
 
 export default function Translation() {
   const word = useTranslationStore((state) => state.word);
@@ -27,11 +28,18 @@ export default function Translation() {
   const setTranslateFrom = useTranslationStore((state) => state.setTranslateFrom);
   const setTranslateTo = useTranslationStore((state) => state.setTranslateTo);
 
+  const isLoading = useTranslationStore((state) => state.isLoading);
+
+
   const translateBtn = useTranslationStore((state) => state.translateBtn);
 
   return (
     <SafeAreaView style={styles.container}>
         <Text style={styles.text}>Translation</Text>
+ 
+              {/* shows loading */}
+              {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
+
       <ScrollView>
 
         {/* translate from */}
