@@ -10,17 +10,26 @@ import {
 import { useTranslationStoreType } from "@/types";
 
 export const useTranslationStore = create<useTranslationStoreType>((set) => ({
-  word: "",
-  query: "",
   error: "",
+  isLoading: false,
+
+  // from text input, which is required parameter for the api
+  word: "",
+
+  // results gotten from the translation api
+  query: "",
   translation: "",
+
+  // from picker component gets the value the user selects, which is required parameter for the api
   translateTo: "",
   translateFrom: "",
-  isLoading: false,
+
+  // actions to update the states
   setWord: (word: string) => set({ word }),
   setTranslateFrom: (translateFrom: string) => set({translateFrom}),
   setTranslateTo: (translateTo: string) => set({translateTo}),
 
+  // button, which is a function that takes in word, translateTo and translateFrom as parameters
   translateBtn: async (word, translateTo, translateFrom) => {
     const options = {
       method: "POST",
