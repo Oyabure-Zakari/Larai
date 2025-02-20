@@ -9,52 +9,25 @@ import { TextInput } from "react-native";
 import { COLORS } from "@/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
-import axios from "axios";
 
 import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native";
-import { TRANSLATION_API_URL, TRANSLATION_RAPID_API_HOST, TRANSLATION_RAPID_API_KEY } from "@env";
+import { useTranslationStore } from "@/store/useTranslationStore";
 
 export default function Translation() {
-  const [word, setWord] = useState("");
+  const word = useTranslationStore((state) => state.word);
+  const setWord = useTranslationStore((state) => state.setWord);
 
-  // result from api
-  const [query, setQuery] = useState("");
-  const [translation, setTranslation] = useState("");
+  const query = useTranslationStore((state) => state.query);
+  const translation = useTranslationStore((state) => state.translation);
 
-  // select languages state
-  const [translateFrom, setTranslateFrom] = useState("");
-  const [translateTo, setTranslateTo] = useState("");
+  const translateFrom = useTranslationStore((state) => state.translateFrom);
+  const translateTo = useTranslationStore((state) => state.translateTo);
+  
+  const setTranslateFrom = useTranslationStore((state) => state.setTranslateFrom);
+  const setTranslateTo = useTranslationStore((state) => state.setTranslateTo);
 
-  const sendBtn = async () => {
-    const options = {
-      method: "POST",
-      url: TRANSLATION_API_URL,
-      params: {
-        from: translateFrom,
-        to: translateTo,
-        query: word,
-      },
-      headers: {
-        "x-rapidapi-key": TRANSLATION_RAPID_API_KEY,
-        "x-rapidapi-host": TRANSLATION_RAPID_API_HOST,
-        "Content-Type": "application/json",
-      },
-      data: {
-        translate: "rapidapi",
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      console.log(response.data);
-      setWord("")
-      setQuery(response.data.query);
-      setTranslation(response.data.translation);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const sendBtn = useTranslationStore((state) => state.sendBtn);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -66,7 +39,7 @@ export default function Translation() {
           <Text style={styles.text2}>From: </Text>
           <Picker
             selectedValue={translateFrom}
-            onValueChange={(value) => setTranslateFrom(value)}
+            onValueChange={setTranslateFrom}
             style={styles.picker}
           >
             <Picker.Item label="Select a language" value="" enabled={false} />
@@ -103,7 +76,7 @@ export default function Translation() {
           <Text style={styles.text2}>To: </Text>
           <Picker
             selectedValue={translateTo}
-            onValueChange={(value) => setTranslateTo(value)}
+            onValueChange={setTranslateTo}
             style={styles.picker}
           >
             <Picker.Item label="Select a language" value="" enabled={false} />
@@ -158,7 +131,7 @@ export default function Translation() {
             onChangeText={setWord}
           />
 
-          <TouchableOpacity style={styles.sendBtn} onPress={sendBtn}>
+          <TouchableOpacity style={styles.sendBtn} onPress={() => sendBtn (word, translateFrom, translateTo)}>
             <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
           </TouchableOpacity>
         </View>
@@ -278,3 +251,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
