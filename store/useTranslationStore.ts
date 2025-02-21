@@ -13,47 +13,42 @@ export const useTranslationStore = create<useTranslationStoreType>((set) => ({
   error: "",
   isLoading: false,
 
-  // from text input, which is required parameter for the api
+  // the word the user types in the text field, & is a requirement for the api
   word: "",
 
-  // results gotten from the translation api
+  // states to hold api results
   query: "",
   translation: "",
 
-  // from picker component gets the value the user selects, which is required parameter for the api
-  translateTo: "",
+  // picker component which allows user to select a language, & are requirements for the api
   translateFrom: "",
+  translateTo: "",
 
   // actions to update the states
-  setWord: (word: string) => set({ word }),
-  setTranslateFrom: (translateFrom: string) => set({translateFrom}),
-  setTranslateTo: (translateTo: string) => set({translateTo}),
+  setWord: (word) => set({ word }),
+  setTranslateFrom: (language) => set({ translateFrom: language }),
+  setTranslateTo: (language) => set({ translateTo: language }),
 
-  // button, which is a function that takes in word, translateTo and translateFrom as parameters
-  translateBtn: async (word, translateTo, translateFrom) => {
-    const options = {
-      method: "POST",
-      url: TRANSLATION_API_URL,
-      params: {
-        from: translateFrom,
-        to: translateTo,
-        query: word,
-      },
-      headers: {
-        "x-rapidapi-key": TRANSLATION_RAPID_API_KEY,
-        "x-rapidapi-host": TRANSLATION_RAPID_API_HOST,
-        "Content-Type": "application/json",
-      },
-      data: {
-        translate: "rapidapi",
-      },
-    };
-
+  // is a function which takes in word, translateFrom and translateTo as parameters, to be used as part of the requirement for the api call
+  translateBtn: async (word, translateFrom, translateTo) => {
     set({ isLoading: true });
-
     try {
-      const response = await axios.request(options);
-      console.log(response.data);
+      const response = await axios.post(
+        TRANSLATION_API_URL,
+        {
+          from: translateFrom,
+          to: translateTo,
+          query: word,
+        },
+        {
+          headers: {
+            "x-rapidapi-key": TRANSLATION_RAPID_API_KEY,
+            "x-rapidapi-host": TRANSLATION_RAPID_API_HOST,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       set({
         query: response.data.query,
         translation: response.data.translation,
@@ -63,13 +58,7 @@ export const useTranslationStore = create<useTranslationStoreType>((set) => ({
       });
     } catch (error) {
       console.error(error);
-      set({
-        query: "",
-        translation: "",
-        word: "",
-        error: error,
-        isLoading: false,
-      });
+      set({ isLoading: false, error: error });
     }
   },
 }));

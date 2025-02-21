@@ -14,6 +14,7 @@ import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native";
 import { useTranslationStore } from "@/store/useTranslationStore";
 import { ActivityIndicator } from "react-native";
+import { Alert } from "react-native";
 
 export default function Translation() {
   const word = useTranslationStore((state) => state.word);
@@ -24,24 +25,27 @@ export default function Translation() {
 
   const translateFrom = useTranslationStore((state) => state.translateFrom);
   const translateTo = useTranslationStore((state) => state.translateTo);
-  
-  const setTranslateFrom = useTranslationStore((state) => state.setTranslateFrom);
+
+  const setTranslateFrom = useTranslationStore(
+    (state) => state.setTranslateFrom
+  );
   const setTranslateTo = useTranslationStore((state) => state.setTranslateTo);
 
   const isLoading = useTranslationStore((state) => state.isLoading);
-
+  const error = useTranslationStore((state) => state.error);
 
   const translateBtn = useTranslationStore((state) => state.translateBtn);
 
   return (
     <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>Translation</Text>
- 
-              {/* shows loading */}
-              {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
+      <Text style={styles.text}>Translation</Text>
+
+      {/* shows loading */}
+      {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
+
+      {error && Alert.alert("Error", error, [{ text: "OK" }])}
 
       <ScrollView>
-
         {/* translate from */}
         <View style={styles.translateFromView}>
           <Text style={styles.text2}>From: </Text>
@@ -130,19 +134,22 @@ export default function Translation() {
       </ScrollView>
 
       <View style={styles.textAndButtonView}>
-          <TextInput
-            style={styles.textInput}
-            multiline={true}
-            placeholder="dictionary"
-            placeholderTextColor="grey"
-            value={word}
-            onChangeText={setWord}
-          />
-
-          <TouchableOpacity style={styles.sendBtn} onPress={() => translateBtn (word, translateFrom, translateTo)}>
-            <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
-          </TouchableOpacity>
-        </View>
+        <TextInput
+          style={styles.textInput}
+          multiline={true}
+          placeholder="dictionary"
+          placeholderTextColor="grey"
+          value={word}
+          onChangeText={setWord}
+        />
+        
+        <TouchableOpacity
+          style={styles.sendBtn}
+          onPress={() => translateBtn(word, translateFrom, translateTo)}
+        >
+          <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -187,7 +194,7 @@ const styles = StyleSheet.create({
 
   queryView: {
     padding: 20,
-    width:"90%",
+    width: "90%",
     marginTop: 20,
     marginLeft: 16,
     alignSelf: "flex-end",
@@ -206,7 +213,7 @@ const styles = StyleSheet.create({
 
   translationView: {
     padding: 20,
-    width:"90%",
+    width: "90%",
     marginTop: 20,
     marginLeft: 16,
     alignSelf: "flex-start",
@@ -259,4 +266,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
