@@ -137,7 +137,7 @@ export default function Translation() {
         <TextInput
           style={styles.textInput}
           multiline={true}
-          placeholder="dictionary"
+          placeholder="translate"
           placeholderTextColor="grey"
           value={word}
           onChangeText={setWord}
