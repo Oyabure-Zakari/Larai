@@ -142,13 +142,16 @@ export default function Translation() {
           value={word}
           onChangeText={setWord}
         />
-        
-        <TouchableOpacity
+
+        {(word && translateFrom && translateTo) && (
+          <TouchableOpacity
           style={styles.sendBtn}
           onPress={() => translateBtn(word, translateFrom, translateTo)}
         >
           <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
         </TouchableOpacity>
+        )}
+
       </View>
     </SafeAreaView>
   );
