@@ -19,25 +19,26 @@ export type useTranslationStoreType = {
   error: any;
   isLoading: boolean;
 
-  // from text input, which is required parameter for the api
+  // the word the user types in the text field, & is a requirement for the api
   word: string;
-  // results gotten from the translation api
+
+  // states to hold api results
   query: string;
   translation: string;
-  
-  // from picker component gets the value the user selects, which is required parameter for the api
+
+  // picker component which allows user to select a language, & are requirements for the api
   translateFrom: string;
   translateTo: string;
 
   // actions to update the states
   setWord: (word: string) => void;
-  setTranslateFrom: (translateFrom: string) => void;
-  setTranslateTo: (translateTo: string) => void;
+  setTranslateFrom: (language: string) => void;
+  setTranslateTo: (language: string) => void;
 
-  // translate button, which is a function that takes in word, translateTo and translateFrom as arguements
+  // is a function which takes in word, translateFrom and translateTo as arguements, to be used as part of the requirement for the api call
   translateBtn: (
     word: string,
-    translateTo: string,
-    translateFrom: string
+    translateFrom: string,
+    translateTo: string
   ) => Promise<void>;
 };
