@@ -6,12 +6,10 @@ import {
   StatusBar,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
 } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
 import QueryAPI from "@/components/translation/QueryAPI";
@@ -21,9 +19,9 @@ import TextAndButton from "@/components/translation/TextAndButton";
 import { useTranslationStore } from "@/store/useTranslationStore";
 
 import SelectLanguage from "@/components/translation/SelectLanguage";
+import Loading from "@/components/translation/Loading";
 
 export default function Translation() {
-
   const query = useTranslationStore((state) => state.query);
   const translation = useTranslationStore((state) => state.translation);
 
@@ -34,26 +32,25 @@ export default function Translation() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Translation</Text>
 
-      {/* shows loading */}
-      {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
-
       {/* shows error */}
       {error && Alert.alert("Error", error, [{ text: "OK" }])}
 
       <ScrollView>
         {/* a component for a user to select lanaguages to translate from & to */}
-        <SelectLanguage/>
+        <SelectLanguage />
+
+        {/* shows loading */}
+        {isLoading && <Loading/>}
 
         {/* shows the query result from the api */}
         {query && <QueryAPI />}
 
         {/* shows the translation result from the api */}
-        {translation && <TranslationAPI/>}
+        {translation && <TranslationAPI />}
       </ScrollView>
 
       {/* text input and button */}
       <TextAndButton />
-
     </SafeAreaView>
   );
 }
