@@ -31,7 +31,7 @@ export default function Translation() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Translation</Text>
+      <Text style={styles.headerText}>Translation</Text>
 
       {/* shows loading */}
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
-  text: {
+  headerText: {
     fontFamily: "segoeui_bold",
     fontSize: FONT_SIZE.mainText_Seoge.large,
   },
