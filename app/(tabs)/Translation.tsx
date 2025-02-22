@@ -16,10 +16,11 @@ import { FONT_SIZE } from "@/constants/fonts";
 
 import QueryAPI from "@/components/translation/QueryAPI";
 import TranslationAPI from "@/components/translation/TranslationAPI";
-import LanguagePicker from "@/components/translation/LanguagePIcker";
 import TextAndButton from "@/components/translation/TextAndButton";
 
 import { useTranslationStore } from "@/store/useTranslationStore";
+
+import SelectLanguage from "@/components/translation/SelectLanguage";
 
 export default function Translation() {
 
@@ -41,14 +42,13 @@ export default function Translation() {
 
       <ScrollView>
         {/* a component for a user to select lanaguages to translate from & to */}
-        <LanguagePicker />
+        <SelectLanguage/>
 
         {/* shows the query result from the api */}
-        {query.length > 0 && <QueryAPI />}
+        {query && <QueryAPI />}
 
         {/* shows the translation result from the api */}
-        {translation.length > 0 && <TranslationAPI/>}
-      
+        {translation && <TranslationAPI/>}
       </ScrollView>
 
       {/* text input and button */}
