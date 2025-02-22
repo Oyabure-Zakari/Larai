@@ -1,23 +1,27 @@
-import { StyleSheet, Text } from "react-native";
 import React from "react";
-import { FONT_SIZE } from "@/constants/fonts";
+import {
+  Text,
+  Alert,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
+
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native";
-import { Platform } from "react-native";
-import { StatusBar } from "react-native";
+
 import { COLORS } from "@/constants/colors";
+import { FONT_SIZE } from "@/constants/fonts";
 
-
-import { ScrollView } from "react-native";
-import { useTranslationStore } from "@/store/useTranslationStore";
-import { ActivityIndicator } from "react-native";
-import { Alert } from "react-native";
-
+import QueryAPI from "@/components/translation/QueryAPI";
+import TranslationAPI from "@/components/translation/TranslationAPI";
 import LanguagePicker from "@/components/translation/LanguagePIcker";
 import TextAndButton from "@/components/translation/TextAndButton";
 
-export default function Translation() {
+import { useTranslationStore } from "@/store/useTranslationStore";
 
+export default function Translation() {
 
   const query = useTranslationStore((state) => state.query);
   const translation = useTranslationStore((state) => state.translation);
@@ -36,23 +40,19 @@ export default function Translation() {
       {error && Alert.alert("Error", error, [{ text: "OK" }])}
 
       <ScrollView>
-        {/* component for a user to select lanaguages to translate from & to */}
-        <LanguagePicker/>
+        {/* a component for a user to select lanaguages to translate from & to */}
+        <LanguagePicker />
 
-        {query.length > 0 && (
-          <View style={styles.queryView}>
-            <Text style={styles.queryText}>{query}</Text>
-          </View>
-        )}
+        {/* shows the query result from the api */}
+        {query.length > 0 && <QueryAPI />}
 
-        {translation.length > 0 && (
-          <View style={styles.translationView}>
-            <Text style={styles.translationText}>{translation}</Text>
-          </View>
-        )}
+        {/* shows the translation result from the api */}
+        {translation.length > 0 && <TranslationAPI/>}
+      
       </ScrollView>
 
-      <TextAndButton/>
+      {/* text input and button */}
+      <TextAndButton />
 
     </SafeAreaView>
   );
@@ -66,47 +66,8 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
-
   text: {
     fontFamily: "segoeui_bold",
     fontSize: FONT_SIZE.mainText_Seoge.large,
-  },
-
-  queryView: {
-    padding: 20,
-    width: "90%",
-    marginTop: 20,
-    marginLeft: 16,
-    alignSelf: "flex-end",
-    borderTopEndRadius: 10,
-    borderTopStartRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-
-  queryText: {
-    marginTop: 60,
-    textAlign: "right",
-    fontFamily: "segoeui_bold",
-    color: COLORS.backgroundColor,
-    fontSize: FONT_SIZE.consolas.small,
-  },
-
-  translationView: {
-    padding: 20,
-    width: "90%",
-    marginTop: 20,
-    marginLeft: 16,
-    alignSelf: "flex-start",
-    borderTopEndRadius: 10,
-    borderTopStartRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: COLORS.backgroundColor,
-  },
-
-  translationText: {
-    textAlign: "left",
-    fontFamily: "segoeui_blackItalic",
-    color: COLORS.green,
-    fontSize: FONT_SIZE.mainText_Seoge.small,
   },
 });

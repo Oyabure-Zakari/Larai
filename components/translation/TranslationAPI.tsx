@@ -3,35 +3,36 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
+
 import { useTranslationStore } from "@/store/useTranslationStore";
 
-export default function Query() {
-  const query = useTranslationStore((state) => state.query);
+export default function TranslationAPI() {
+  const translation = useTranslationStore((state) => state.translation);
 
   return (
-    <View style={styles.queryView}>
-      <Text style={styles.queryText}>{query}</Text>
+    <View style={styles.translationView}>
+      <Text style={styles.translationText}>{translation}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  queryView: {
+  translationView: {
     padding: 20,
     width: "90%",
     marginTop: 20,
     marginLeft: 16,
-    alignSelf: "flex-end",
+    alignSelf: "flex-start",
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
     borderBottomRightRadius: 10,
+    backgroundColor: COLORS.backgroundColor,
   },
 
-  queryText: {
-    marginTop: 60,
-    textAlign: "right",
-    fontFamily: "segoeui_bold",
-    color: COLORS.backgroundColor,
-    fontSize: FONT_SIZE.consolas.small,
+  translationText: {
+    textAlign: "left",
+    fontFamily: "segoeui_blackItalic",
+    color: COLORS.green,
+    fontSize: FONT_SIZE.mainText_Seoge.small,
   },
 });
