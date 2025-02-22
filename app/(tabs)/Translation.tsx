@@ -1,5 +1,5 @@
 import { StyleSheet, Text } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { FONT_SIZE } from "@/constants/fonts";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View } from "react-native";
@@ -15,6 +15,7 @@ import { ScrollView } from "react-native";
 import { useTranslationStore } from "@/store/useTranslationStore";
 import { ActivityIndicator } from "react-native";
 import { Alert } from "react-native";
+import TranslateFrom from "@/components/translation/TranslateFrom";
 
 export default function Translation() {
   const word = useTranslationStore((state) => state.word);
@@ -26,9 +27,6 @@ export default function Translation() {
   const translateFrom = useTranslationStore((state) => state.translateFrom);
   const translateTo = useTranslationStore((state) => state.translateTo);
 
-  const setTranslateFrom = useTranslationStore(
-    (state) => state.setTranslateFrom
-  );
   const setTranslateTo = useTranslationStore((state) => state.setTranslateTo);
 
   const isLoading = useTranslationStore((state) => state.isLoading);
@@ -47,41 +45,7 @@ export default function Translation() {
 
       <ScrollView>
         {/* translate from */}
-        <View style={styles.translateFromView}>
-          <Text style={styles.text2}>From: </Text>
-          <Picker
-            selectedValue={translateFrom}
-            onValueChange={setTranslateFrom}
-            style={styles.picker}
-          >
-            <Picker.Item label="Select a language" value="" enabled={false} />
-            <Picker.Item label="English 🇬🇧🇺🇸🇦🇺" value="en" />
-            <Picker.Item label="Chinese (Mandarin) 🇨🇳" value="zh" />
-            <Picker.Item label="Spanish 🇪🇸🇲🇽🇦🇷" value="es" />
-            <Picker.Item label="Hindi 🇮🇳" value="hi" />
-            <Picker.Item label="Arabic 🇸🇦🇪🇬🇦🇪" value="ar" />
-            <Picker.Item label="French 🇫🇷🇨🇦🇧🇪" value="fr" />
-            <Picker.Item label="Bengali 🇧🇩🇮🇳" value="bn" />
-            <Picker.Item label="Portuguese 🇵🇹🇧🇷" value="pt" />
-            <Picker.Item label="Russian 🇷🇺" value="ru" />
-            <Picker.Item label="Urdu 🇵🇰🇮🇳" value="ur" />
-            <Picker.Item label="German 🇩🇪🇦🇹🇨🇭" value="de" />
-            <Picker.Item label="Japanese 🇯🇵" value="ja" />
-            <Picker.Item label="Swahili 🇰🇪🇹🇿🇺🇬" value="sw" />
-            <Picker.Item label="Italian 🇮🇹" value="it" />
-            <Picker.Item label="Turkish 🇹🇷" value="tr" />
-            <Picker.Item label="Korean 🇰🇷" value="ko" />
-            <Picker.Item label="Tamil 🇮🇳🇱🇰🇸🇬" value="ta" />
-            <Picker.Item label="Persian (Farsi) 🇮🇷" value="fa" />
-            <Picker.Item label="Vietnamese 🇻🇳" value="vi" />
-            <Picker.Item label="Polish 🇵🇱" value="pl" />
-            <Picker.Item label="Dutch 🇳🇱🇧🇪" value="nl" />
-            <Picker.Item label="Filipino (Tagalog) 🇵🇭" value="tl" />
-            <Picker.Item label="Thai 🇹🇭" value="th" />
-            <Picker.Item label="Greek 🇬🇷" value="el" />
-            <Picker.Item label="Hebrew 🇮🇱" value="he" />
-          </Picker>
-        </View>
+        <TranslateFrom/>
 
         {/* translate to */}
         <View style={styles.translateToView}>
@@ -163,15 +127,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-
-  translateFromView: {
-    gap: 4,
-    marginTop: 40,
-    height: 40,
-    width: "95%",
-    alignItems: "center",
-    flexDirection: "row",
   },
 
   translateToView: {
