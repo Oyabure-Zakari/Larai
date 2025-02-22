@@ -5,32 +5,25 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { View } from "react-native";
 import { Platform } from "react-native";
 import { StatusBar } from "react-native";
-import { TextInput } from "react-native";
 import { COLORS } from "@/constants/colors";
-import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
+
 
 import { ScrollView } from "react-native";
 import { useTranslationStore } from "@/store/useTranslationStore";
 import { ActivityIndicator } from "react-native";
 import { Alert } from "react-native";
-import TranslateFrom from "@/components/translation/TranslateFrom";
-import TranslateTo from "@/components/translation/TranslateTo";
+
+import LanguagePicker from "@/components/translation/LanguagePIcker";
+import TextAndButton from "@/components/translation/TextAndButton";
 
 export default function Translation() {
-  const word = useTranslationStore((state) => state.word);
-  const setWord = useTranslationStore((state) => state.setWord);
+
 
   const query = useTranslationStore((state) => state.query);
   const translation = useTranslationStore((state) => state.translation);
 
-  const translateFrom = useTranslationStore((state) => state.translateFrom);
-  const translateTo = useTranslationStore((state) => state.translateTo);
-
   const isLoading = useTranslationStore((state) => state.isLoading);
   const error = useTranslationStore((state) => state.error);
-
-  const translateBtn = useTranslationStore((state) => state.translateBtn);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,14 +32,12 @@ export default function Translation() {
       {/* shows loading */}
       {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
 
+      {/* shows error */}
       {error && Alert.alert("Error", error, [{ text: "OK" }])}
 
       <ScrollView>
-        {/* translate from */}
-        <TranslateFrom/>
-
-        {/* translate to */}
-        <TranslateTo/>
+        {/* component for a user to select lanaguages to translate from & to */}
+        <LanguagePicker/>
 
         {query.length > 0 && (
           <View style={styles.queryView}>
@@ -61,26 +52,8 @@ export default function Translation() {
         )}
       </ScrollView>
 
-      <View style={styles.textAndButtonView}>
-        <TextInput
-          style={styles.textInput}
-          multiline={true}
-          placeholder="translate"
-          placeholderTextColor="grey"
-          value={word}
-          onChangeText={setWord}
-        />
+      <TextAndButton/>
 
-        {(word && translateFrom && translateTo) && (
-          <TouchableOpacity
-          style={styles.sendBtn}
-          onPress={() => translateBtn(word, translateFrom, translateTo)}
-        >
-          <Ionicons name="send" size={20} color={COLORS.primaryBlack} />
-        </TouchableOpacity>
-        )}
-
-      </View>
     </SafeAreaView>
   );
 }
@@ -135,36 +108,5 @@ const styles = StyleSheet.create({
     fontFamily: "segoeui_blackItalic",
     color: COLORS.green,
     fontSize: FONT_SIZE.mainText_Seoge.small,
-  },
-
-  textAndButtonView: {
-    gap: 10,
-    // height: 45,
-    width: "100%",
-    marginTop: "auto",
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 4,
-    //backgroundColor: "red",
-  },
-
-  textInput: {
-    width: "85%",
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: COLORS.secondaryGrey,
-    marginLeft: 4,
-    paddingLeft: 8,
-  },
-
-  sendBtn: {
-    width: "10%",
-    height: 35,
-    borderRadius: 10,
-    backgroundColor: COLORS.green,
-    marginRight: 4,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
