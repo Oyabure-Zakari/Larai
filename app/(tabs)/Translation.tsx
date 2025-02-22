@@ -10,12 +10,12 @@ import { COLORS } from "@/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
-import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native";
 import { useTranslationStore } from "@/store/useTranslationStore";
 import { ActivityIndicator } from "react-native";
 import { Alert } from "react-native";
 import TranslateFrom from "@/components/translation/TranslateFrom";
+import TranslateTo from "@/components/translation/TranslateTo";
 
 export default function Translation() {
   const word = useTranslationStore((state) => state.word);
@@ -26,8 +26,6 @@ export default function Translation() {
 
   const translateFrom = useTranslationStore((state) => state.translateFrom);
   const translateTo = useTranslationStore((state) => state.translateTo);
-
-  const setTranslateTo = useTranslationStore((state) => state.setTranslateTo);
 
   const isLoading = useTranslationStore((state) => state.isLoading);
   const error = useTranslationStore((state) => state.error);
@@ -48,41 +46,7 @@ export default function Translation() {
         <TranslateFrom/>
 
         {/* translate to */}
-        <View style={styles.translateToView}>
-          <Text style={styles.text2}>To: </Text>
-          <Picker
-            selectedValue={translateTo}
-            onValueChange={setTranslateTo}
-            style={styles.picker}
-          >
-            <Picker.Item label="Select a language" value="" enabled={false} />
-            <Picker.Item label="English 🇬🇧🇺🇸🇦🇺" value="en" />
-            <Picker.Item label="Chinese (Mandarin) 🇨🇳" value="zh" />
-            <Picker.Item label="Spanish 🇪🇸🇲🇽🇦🇷" value="es" />
-            <Picker.Item label="Hindi 🇮🇳" value="hi" />
-            <Picker.Item label="Arabic 🇸🇦🇪🇬🇦🇪" value="ar" />
-            <Picker.Item label="French 🇫🇷🇨🇦🇧🇪" value="fr" />
-            <Picker.Item label="Bengali 🇧🇩🇮🇳" value="bn" />
-            <Picker.Item label="Portuguese 🇵🇹🇧🇷" value="pt" />
-            <Picker.Item label="Russian 🇷🇺" value="ru" />
-            <Picker.Item label="Urdu 🇵🇰🇮🇳" value="ur" />
-            <Picker.Item label="German 🇩🇪🇦🇹🇨🇭" value="de" />
-            <Picker.Item label="Japanese 🇯🇵" value="ja" />
-            <Picker.Item label="Swahili 🇰🇪🇹🇿🇺🇬" value="sw" />
-            <Picker.Item label="Italian 🇮🇹" value="it" />
-            <Picker.Item label="Turkish 🇹🇷" value="tr" />
-            <Picker.Item label="Korean 🇰🇷" value="ko" />
-            <Picker.Item label="Tamil 🇮🇳🇱🇰🇸🇬" value="ta" />
-            <Picker.Item label="Persian (Farsi) 🇮🇷" value="fa" />
-            <Picker.Item label="Vietnamese 🇻🇳" value="vi" />
-            <Picker.Item label="Polish 🇵🇱" value="pl" />
-            <Picker.Item label="Dutch 🇳🇱🇧🇪" value="nl" />
-            <Picker.Item label="Filipino (Tagalog) 🇵🇭" value="tl" />
-            <Picker.Item label="Thai 🇹🇭" value="th" />
-            <Picker.Item label="Greek 🇬🇷" value="el" />
-            <Picker.Item label="Hebrew 🇮🇱" value="he" />
-          </Picker>
-        </View>
+        <TranslateTo/>
 
         {query.length > 0 && (
           <View style={styles.queryView}>
@@ -129,21 +93,6 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
-  translateToView: {
-    gap: 25,
-    height: 40,
-    width: "95%",
-    marginTop: 40,
-    alignItems: "center",
-    flexDirection: "row",
-  },
-
-  picker: {
-    height: 60,
-    width: "80%",
-    marginLeft: 10,
-    backgroundColor: COLORS.secondaryGrey,
-  },
 
   text: {
     fontFamily: "segoeui_bold",
@@ -186,11 +135,6 @@ const styles = StyleSheet.create({
     fontFamily: "segoeui_blackItalic",
     color: COLORS.green,
     fontSize: FONT_SIZE.mainText_Seoge.small,
-  },
-
-  text2: {
-    fontSize: 15,
-    fontFamily: "segoeui_blackItalic",
   },
 
   textAndButtonView: {
