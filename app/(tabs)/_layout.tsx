@@ -8,18 +8,19 @@ export default function TabsLayout() {
     <Tabs screenOptions={
       {
         headerShown:false,
-        tabBarActiveTintColor: COLORS.primaryGrey,
-        tabBarInactiveTintColor: COLORS.SecondaryBlack,
+        tabBarActiveTintColor: COLORS.green,
+        tabBarInactiveTintColor: COLORS.secondaryGrey,
         tabBarShowLabel:true,
         tabBarStyle: {
-          backgroundColor: COLORS.primaryBlack,
+          height: "10%",
+          backgroundColor: COLORS.backgroundColor,
         }
       }
       }>
       <Tabs.Screen 
         name="index" 
         options={{ 
-          tabBarLabel:"Dictionary",
+          tabBarLabel: "Dictionary",
           tabBarIcon:({color, size}) => (
             <MaterialIcons
               name="library-books"
