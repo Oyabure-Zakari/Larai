@@ -17,14 +17,11 @@ import TextFieldAndButton from "@/components/dictionary/TextFieldAndButton";
 
 import { useDictionaryStore } from "@/store/useDictionaryStore";
 import ShowLoading from "@/components/dictionary/ShowLoading";
+import ShowError from "@/components/dictionary/ShowError";
 
 export default function Dictionary() {
   const error = useDictionaryStore((state) => state.error);
   const isLoading = useDictionaryStore((state) => state.isLoading);
-
-  useEffect(() => {
-    error !== "" && Alert.alert("Error", error, [{ text: "OK" }]);
-  }, [error]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,6 +29,9 @@ export default function Dictionary() {
 
       {/* header text */}
       <HeaderText />
+
+      {/* shows error */}
+      <ShowError/>
 
       {/* shows loading */}
       <ShowLoading/>
