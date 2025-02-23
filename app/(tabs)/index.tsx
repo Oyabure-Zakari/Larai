@@ -16,6 +16,7 @@ import HeaderText from "@/components/dictionary/HeaderText";
 import TextFieldAndButton from "@/components/dictionary/TextFieldAndButton";
 
 import { useDictionaryStore } from "@/store/useDictionaryStore";
+import ShowLoading from "@/components/dictionary/ShowLoading";
 
 export default function Dictionary() {
   const error = useDictionaryStore((state) => state.error);
@@ -33,7 +34,7 @@ export default function Dictionary() {
       <HeaderText />
 
       {/* shows loading */}
-      {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
+      <ShowLoading/>
 
       {/* displays the result of the searched word */}
       <DictionaryList />
