@@ -1,11 +1,8 @@
 import React from "react";
-import { useEffect } from "react";
 import {
   StatusBar,
   Platform,
   StyleSheet,
-  ActivityIndicator,
-  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
