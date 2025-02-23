@@ -17,8 +17,6 @@ import ShowLoading from "@/components/dictionary/ShowLoading";
 import DictionaryList from "@/components/dictionary/DictionaryList";
 import TextFieldAndButton from "@/components/dictionary/TextFieldAndButton";
 
-import { useDictionaryStore } from "@/store/useDictionaryStore";
-
 export default function Dictionary() {
   return (
     <SafeAreaView style={styles.container}>
