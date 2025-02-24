@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
+
 import { useTranslationStore } from "@/store/useTranslationStore";
 
 export default function QueryAPI() {
@@ -10,7 +11,7 @@ export default function QueryAPI() {
 
   return (
     <View style={styles.queryView}>
-      <Text style={styles.queryText}>{query}</Text>
+      {query && <Text style={styles.queryText}>{query}</Text>}
     </View>
   );
 }
