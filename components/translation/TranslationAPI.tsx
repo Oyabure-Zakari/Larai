@@ -11,7 +11,7 @@ export default function TranslationAPI() {
 
   return (
     <View style={styles.translationView}>
-      <Text style={styles.translationText}>{translation}</Text>
+      {translation && <Text style={styles.translationText}>{translation}</Text>}
     </View>
   );
 }
