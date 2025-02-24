@@ -24,7 +24,6 @@ import SelectLanguage from "@/components/translation/SelectLanguage";
 import { useTranslationStore } from "@/store/useTranslationStore";
 
 export default function Translation() {
-  const query = useTranslationStore((state) => state.query);
   const translation = useTranslationStore((state) => state.translation);
 
   return (
@@ -42,7 +41,7 @@ export default function Translation() {
         <Loading/>
 
         {/* shows the query result from the api */}
-        {query && <QueryAPI />}
+        <QueryAPI />
 
         {/* shows the translation result from the api */}
         {translation && <TranslationAPI />}
