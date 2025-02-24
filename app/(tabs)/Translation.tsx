@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Text,
-  Alert,
   Platform,
   StatusBar,
   StyleSheet,
@@ -16,35 +15,30 @@ import QueryAPI from "@/components/translation/QueryAPI";
 import TranslationAPI from "@/components/translation/TranslationAPI";
 import TextAndButton from "@/components/translation/TextAndButton";
 
-
 import Loading from "@/components/translation/Loading";
 import APIError from "@/components/translation/APIError";
 import SelectLanguage from "@/components/translation/SelectLanguage";
 
-import { useTranslationStore } from "@/store/useTranslationStore";
-
 export default function Translation() {
-  const translation = useTranslationStore((state) => state.translation);
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Translation</Text>
 
       {/* shows error */}
-      <APIError/>
+      <APIError />
 
       <ScrollView>
         {/* a component for a user to select lanaguages to translate from & to */}
         <SelectLanguage />
 
         {/* shows loading */}
-        <Loading/>
+        <Loading />
 
         {/* shows the query result from the api */}
         <QueryAPI />
 
         {/* shows the translation result from the api */}
-        {translation && <TranslationAPI />}
+        <TranslationAPI />
       </ScrollView>
 
       {/* text input and button */}
