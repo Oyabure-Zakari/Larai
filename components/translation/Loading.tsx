@@ -5,10 +5,14 @@ import { ActivityIndicator } from 'react-native'
 
 import { COLORS } from '@/constants/colors'
 
+import { useTranslationStore } from '@/store/useTranslationStore';
+
 export default function Loading() {
+  const isLoading = useTranslationStore((state) => state.isLoading);
+
   return (
     <View style={styles.Loading}> 
-      <ActivityIndicator size={"large"} color={COLORS.green} />
+      {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
     </View>
   )
 }
