@@ -28,7 +28,7 @@ const actions = [
 ];
 
 export default function Translate() {
-  const handlePress = (name:string) => {
+  const handlePress = (name?:string) => {
     switch (name) {
       case "bt_Camera":
         Alert.alert("Camera button pressed!");
@@ -44,9 +44,7 @@ export default function Translate() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Translate</Text>
-      <FloatingAction floatingIcon={<MaterialCommunityIcons name="image-auto-adjust" size={35} color={COLORS.backgroundColor} />} color={COLORS.green} actions={actions} onPressItem={name => {
-      console.log(`selected button: ${name}`);
-    }}/>
+      <FloatingAction floatingIcon={<MaterialCommunityIcons name="image-auto-adjust" size={35} color={COLORS.backgroundColor} />} color={COLORS.green} actions={actions} onPressItem={handlePress}/>
     </SafeAreaView>
   )
 }
