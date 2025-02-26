@@ -7,6 +7,7 @@ import { Alert } from 'react-native';
 
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { COLORS } from '@/constants/colors';
 
 const actions = [
@@ -43,7 +44,7 @@ export default function Translate() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Translate</Text>
-      <FloatingAction color={COLORS.green} actions={actions} onPressItem={name => {
+      <FloatingAction floatingIcon={<MaterialCommunityIcons name="image-auto-adjust" size={35} color={COLORS.backgroundColor} />} color={COLORS.green} actions={actions} onPressItem={name => {
       console.log(`selected button: ${name}`);
     }}/>
     </SafeAreaView>
