@@ -36,15 +36,15 @@ export default function OnboardingUI() {
 
           },
 
-          // {
-          //   backgroundColor: COLORS.primaryGrey,
-          //   image: <OnboardingImage source={IMAGES.onboard2} />,
-          //   title: <OnboardingTitle title={"Translate"} />,
-          //   subtitle: <OnboardingSubtitle subTitle={
-          //         '" See it, scan it, and translate it effortlessly turn any image into text and understand the world around you in seconds. "'
-          //       }
-          //     />
-          // },
+          {
+            backgroundColor: COLORS.primaryGrey,
+            image: <OnboardingImage source={IMAGES.onboard2} />,
+            title: <OnboardingTitle title={"Translate"} />,
+            subtitle: <OnboardingSubtitle subTitle={
+                  '" See it, scan it, and translate it effortlessly turn any image into text and understand the world around you in seconds. "'
+                }
+              />
+          },
 
           {
             backgroundColor: COLORS.primaryGrey,
