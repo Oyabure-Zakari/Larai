@@ -10,9 +10,13 @@ export default function QueryAPI() {
   const query = useTranslationStore((state) => state.query);
 
   return (
-    <View style={styles.queryView}>
-      {query && <Text style={styles.queryText}>{query}</Text>}
-    </View>
+    <>
+      {query && (
+        <View style={styles.queryView}>
+          <Text style={styles.queryText}>{query}</Text>
+        </View>
+      )}
+    </>
   );
 }
 
