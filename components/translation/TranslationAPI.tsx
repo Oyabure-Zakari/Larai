@@ -10,9 +10,13 @@ export default function TranslationAPI() {
   const translation = useTranslationStore((state) => state.translation);
 
   return (
-    <View style={styles.translationView}>
-      {translation && <Text style={styles.translationText}>{translation}</Text>}
-    </View>
+    <>
+      {translation && (
+        <View style={styles.translationView}>
+          <Text style={styles.translationText}>{translation}</Text>
+        </View>
+      )}
+    </>
   );
 }
 
