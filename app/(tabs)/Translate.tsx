@@ -32,6 +32,21 @@ const actions = [
 
 export default function Translate() {
   const [image, setImage] = useState<string | null>(null);
+  const takePhoto = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: 'images',
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      console.log(image);
+      
+    }
+  };
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -42,7 +57,7 @@ export default function Translate() {
       quality: 1,
     });
 
-    console.log("results", result);
+    console.log(result);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -52,7 +67,7 @@ export default function Translate() {
   const handlePress = (name?:string) => {
     switch (name) {
       case "bt_Camera":
-        Alert.alert("Camera button pressed!");
+        takePhoto();
         break;
       case "bt_Gallery":
         pickImage()
@@ -85,8 +100,8 @@ const styles = StyleSheet.create({
       fontFamily: "segoeui_bold"
     },
 
-    image: {
-      width: 200,
-      height: 200,
-    },
+      image: {
+    width: 200,
+    height: 200,
+  },
 })
