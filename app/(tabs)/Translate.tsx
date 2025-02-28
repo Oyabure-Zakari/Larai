@@ -106,13 +106,11 @@ export default function Translate() {
   
   await upload(cld, {file: image , options: options, callback: (error: any, response: any) => {
       //.. handle response
-      try {
-        console.log(response.url);
-        setImageUrl(response.url);
-      } catch (error) {
+      if(response) {
+        console.log( response);
+      } else {
         console.log(error);
-        
-      }
+      };
   }})
   };
 
