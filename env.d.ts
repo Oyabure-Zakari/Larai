@@ -6,4 +6,7 @@ declare module "@env" {
   export const TRANSLATION_API_URL: string;
   export const TRANSLATION_RAPID_API_KEY: string;
   export const TRANSLATION_RAPID_API_HOST: string;
+
+  export const CLOUD_NAME: string;
+  export const UPLOAD_PRESET: string;
 }
