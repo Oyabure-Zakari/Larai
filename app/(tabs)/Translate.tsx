@@ -15,6 +15,8 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
+import {CLOUD_NAME, UPLOAD_PRESET} from "@env";
+
 import { Cloudinary } from "@cloudinary/url-gen";
 import {upload} from "cloudinary-react-native"
 
@@ -90,7 +92,7 @@ export default function Translate() {
   const uploadToCloudinary = async () => {
     const cld = new Cloudinary({
       cloud: { 
-          cloudName: "dngo9kz1b"
+          cloudName: CLOUD_NAME
       },
       url: { 
           secure: true
@@ -98,7 +100,7 @@ export default function Translate() {
   });
   
   const options = {
-      upload_preset: "nes2azjo",
+      upload_preset: UPLOAD_PRESET,
       unsigned: true,
   }
   
