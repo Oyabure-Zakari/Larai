@@ -15,11 +15,10 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
-import {CLOUD_NAME, UPLOAD_PRESET} from "@env";
+import { CLOUD_NAME, UPLOAD_PRESET } from "@env";
 
 import { Cloudinary } from "@cloudinary/url-gen";
-import {upload} from "cloudinary-react-native"
-
+import { upload } from "cloudinary-react-native";
 
 const actions = [
   {
@@ -44,7 +43,7 @@ const actions = [
 
 export default function Translate() {
   const [image, setImage] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const takePhoto = async () => {
     let result = await ImagePicker.launchCameraAsync({
@@ -91,32 +90,38 @@ export default function Translate() {
 
   const uploadToCloudinary = async () => {
     const cld = new Cloudinary({
-      cloud: { 
-          cloudName: CLOUD_NAME
+      cloud: {
+        cloudName: CLOUD_NAME,
       },
-      url: { 
-          secure: true
-      }
-  });
-  
-  const options = {
+      url: {
+        secure: true,
+      },
+    });
+
+    const options = {
       upload_preset: UPLOAD_PRESET,
       unsigned: true,
-  }
-  
-  await upload(cld, {file: image , options: options, callback: (error: any, response: any) => {
-      //.. handle response
-      if(response) {
-        console.log( response);
-      } else {
-        console.log(error);
-      };
-  }})
+    };
+
+    await upload(cld, {
+      file: image,
+      options: options,
+      callback: (error: any, response: any) => {
+        //.. handle response
+        if (response) {
+          console.log(response);
+        } else {
+          console.log(error);
+        }
+      },
+    });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text onPress={uploadToCloudinary} style={styles.text}>Translate</Text>
+      <Text onPress={uploadToCloudinary} style={styles.text}>
+        Translate
+      </Text>
 
       {image && <Image source={{ uri: image }} style={styles.image} />}
 
