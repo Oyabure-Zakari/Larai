@@ -19,6 +19,7 @@ import { CLOUD_NAME, UPLOAD_PRESET } from "@env";
 
 import { Cloudinary } from "@cloudinary/url-gen";
 import { upload } from "cloudinary-react-native";
+import { TouchableOpacity } from "react-native";
 
 const actions = [
   {
@@ -125,6 +126,12 @@ export default function Translate() {
 
       {image && <Image source={{ uri: image }} style={styles.image} />}
 
+      {image && ( 
+        <TouchableOpacity style={styles.translateTextBtn}>
+          <Text style={styles.textBtn}>Translate text</Text>
+        </TouchableOpacity>
+      )}
+
       <FloatingAction
         floatingIcon={
           <MaterialCommunityIcons
@@ -157,5 +164,20 @@ const styles = StyleSheet.create({
     width: "95%",
     height: 200,
     marginTop: 20,
+  },
+
+  translateTextBtn: {
+    height: 40,
+    width: "40%",
+    marginTop: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.backgroundColor,
+  },
+
+  textBtn: {
+    color: COLORS.green,
+    fontFamily: "segoeui_bold",
   },
 });
