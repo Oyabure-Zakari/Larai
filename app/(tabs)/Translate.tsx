@@ -17,7 +17,7 @@ import axios from 'axios';
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
-import { CLOUD_NAME, UPLOAD_PRESET } from "@env";
+import { CLOUD_NAME, UPLOAD_PRESET, OCR_EXTRACT_TEXT_API_URL, OCR_EXTRACT_TEXT_RAPID_API_KEY, OCR_EXTRACT_TEXT_RAPID_API_HOST } from "@env";
 
 import { Cloudinary } from "@cloudinary/url-gen";
 import { upload } from "cloudinary-react-native";
@@ -134,14 +134,14 @@ export default function Translate() {
   async function translateApi(imageUrl:string){
     const options = {
       method: 'GET',
-      url: 'https://ocr-extract-text3.p.rapidapi.com/ocr_translate',
+      url: OCR_EXTRACT_TEXT_API_URL,
       params: {
         url: imageUrl,
         dest: 'en'
       },
       headers: {
-        'x-rapidapi-key': 'bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a',
-        'x-rapidapi-host': 'ocr-extract-text3.p.rapidapi.com'
+        'x-rapidapi-key': OCR_EXTRACT_TEXT_RAPID_API_KEY,
+        'x-rapidapi-host': OCR_EXTRACT_TEXT_RAPID_API_HOST
       }
     };
     
