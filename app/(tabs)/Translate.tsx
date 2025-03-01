@@ -12,6 +12,8 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
+import axios from 'axios';
+
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
@@ -20,6 +22,10 @@ import { CLOUD_NAME, UPLOAD_PRESET } from "@env";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { upload } from "cloudinary-react-native";
 import { TouchableOpacity } from "react-native";
+import { ActivityIndicator } from "react-native";
+import { Alert } from "react-native";
+import { ScrollView } from "react-native";
+import { View } from "react-native";
 
 const actions = [
   {
@@ -45,6 +51,10 @@ const actions = [
 export default function Translate() {
   const [image, setImage] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [error, setError] = useState("");
+  const [originalText, setOriginalText] = useState("");
+  const [text, setText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const takePhoto = async () => {
     let result = await ImagePicker.launchCameraAsync({
@@ -110,13 +120,40 @@ export default function Translate() {
       callback: (error: any, response: any) => {
         //.. handle response
         if (response) {
-          console.log(response);
+          console.log(response.url);
+          setImageUrl(response.url);
+          translateApi(imageUrl);
         } else {
           console.log(error);
+          setError(error)
         }
       },
     });
   };
+
+  async function translateApi(imageUrl:string){
+    const options = {
+      method: 'GET',
+      url: 'https://ocr-extract-text3.p.rapidapi.com/ocr_translate',
+      params: {
+        url: imageUrl,
+        dest: 'en'
+      },
+      headers: {
+        'x-rapidapi-key': 'bdb64cf2eemsh8a6592eeb408bcfp122f74jsn0e7790dcb96a',
+        'x-rapidapi-host': 'ocr-extract-text3.p.rapidapi.com'
+      }
+    };
+    
+    try {
+      const response = await axios.request(options);
+      console.log("from api", response.data);
+      setOriginalText(response.data.original_text);
+      setText(response.data.text);
+    } catch (error) {
+      console.error("from api", error);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -127,10 +164,19 @@ export default function Translate() {
       {image && <Image source={{ uri: image }} style={styles.image} />}
 
       {image && ( 
-        <TouchableOpacity style={styles.translateTextBtn}>
+        <TouchableOpacity onPress={uploadToCloudinary} style={styles.translateTextBtn}>
           <Text style={styles.textBtn}>Translate text</Text>
         </TouchableOpacity>
       )}
+
+      {isLoading && (<ActivityIndicator size={"large"} color={COLORS.green}/>)}
+
+      <View style={styles.scrollView}>
+        <ScrollView>
+          {originalText && <Text>{originalText}</Text>}
+          {text && <Text>{text}</Text>}
+        </ScrollView>
+      </View>
 
       <FloatingAction
         floatingIcon={
@@ -179,5 +225,10 @@ const styles = StyleSheet.create({
   textBtn: {
     color: COLORS.green,
     fontFamily: "segoeui_bold",
+  },
+
+  scrollView: {
+    width: "95%",
+    marginTop: 20,
   },
 });
