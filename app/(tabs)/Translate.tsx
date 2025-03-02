@@ -12,12 +12,20 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import axios from 'axios';
+import axios from "axios";
 
 import { COLORS } from "@/constants/colors";
 import { FONT_SIZE } from "@/constants/fonts";
 
-import { CLOUD_NAME, UPLOAD_PRESET, OCR_EXTRACT_TEXT_API_URL, OCR_EXTRACT_TEXT_RAPID_API_KEY, OCR_EXTRACT_TEXT_RAPID_API_HOST } from "@env";
+import { Picker } from "@react-native-picker/picker";
+
+import {
+  CLOUD_NAME,
+  UPLOAD_PRESET,
+  OCR_EXTRACT_TEXT_API_URL,
+  OCR_EXTRACT_TEXT_RAPID_API_KEY,
+  OCR_EXTRACT_TEXT_RAPID_API_HOST,
+} from "@env";
 
 import { Cloudinary } from "@cloudinary/url-gen";
 import { upload } from "cloudinary-react-native";
@@ -51,8 +59,8 @@ const actions = [
 export default function Translate() {
   const [image, setImage] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [translateTo, setTranslateTo] = useState("");
   const [error, setError] = useState("");
-  const [originalText, setOriginalText] = useState("");
   const [text, setText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -125,30 +133,29 @@ export default function Translate() {
           translateApi(imageUrl);
         } else {
           console.log(error);
-          setError(error)
+          setError(error);
         }
       },
     });
   };
 
-  async function translateApi(imageUrl:string){
+  async function translateApi(imageUrl: string) {
     const options = {
-      method: 'GET',
+      method: "GET",
       url: OCR_EXTRACT_TEXT_API_URL,
       params: {
         url: imageUrl,
-        dest: 'en'
+        dest: translateTo,
       },
       headers: {
-        'x-rapidapi-key': OCR_EXTRACT_TEXT_RAPID_API_KEY,
-        'x-rapidapi-host': OCR_EXTRACT_TEXT_RAPID_API_HOST
-      }
+        "x-rapidapi-key": OCR_EXTRACT_TEXT_RAPID_API_KEY,
+        "x-rapidapi-host": OCR_EXTRACT_TEXT_RAPID_API_HOST,
+      },
     };
-    
+
     try {
       const response = await axios.request(options);
       console.log("from api", response.data);
-      setOriginalText(response.data.original_text);
       setText(response.data.text);
     } catch (error) {
       console.error("from api", error);
@@ -157,26 +164,63 @@ export default function Translate() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text onPress={uploadToCloudinary} style={styles.text}>
-        Translate
-      </Text>
 
-      {image && <Image source={{ uri: image }} style={styles.image} />}
-
-      {image && ( 
-        <TouchableOpacity onPress={uploadToCloudinary} style={styles.translateTextBtn}>
-          <Text style={styles.textBtn}>Translate text</Text>
-        </TouchableOpacity>
+      <ScrollView style={styles.scrollView}>
+      {image && (
+        <View style={styles.translateToView}>
+          <Text style={styles.toText}>To: </Text>
+          <Picker
+            selectedValue={translateTo}
+            onValueChange={(value) => setTranslateTo(value)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Select a language" value="" enabled={false} />
+            <Picker.Item label="English 🇬🇧🇺🇸🇦🇺" value="en" />
+            <Picker.Item label="Chinese (Mandarin) 🇨🇳" value="zh" />
+            <Picker.Item label="Spanish 🇪🇸🇲🇽🇦🇷" value="es" />
+            <Picker.Item label="Hindi 🇮🇳" value="hi" />
+            <Picker.Item label="Arabic 🇸🇦🇪🇬🇦🇪" value="ar" />
+            <Picker.Item label="French 🇫🇷🇨🇦🇧🇪" value="fr" />
+            <Picker.Item label="Bengali 🇧🇩🇮🇳" value="bn" />
+            <Picker.Item label="Portuguese 🇵🇹🇧🇷" value="pt" />
+            <Picker.Item label="Russian 🇷🇺" value="ru" />
+            <Picker.Item label="Urdu 🇵🇰🇮🇳" value="ur" />
+            <Picker.Item label="German 🇩🇪🇦🇹🇨🇭" value="de" />
+            <Picker.Item label="Japanese 🇯🇵" value="ja" />
+            <Picker.Item label="Swahili 🇰🇪🇹🇿🇺🇬" value="sw" />
+            <Picker.Item label="Italian 🇮🇹" value="it" />
+            <Picker.Item label="Turkish 🇹🇷" value="tr" />
+            <Picker.Item label="Korean 🇰🇷" value="ko" />
+            <Picker.Item label="Tamil 🇮🇳🇱🇰🇸🇬" value="ta" />
+            <Picker.Item label="Persian (Farsi) 🇮🇷" value="fa" />
+            <Picker.Item label="Vietnamese 🇻🇳" value="vi" />
+            <Picker.Item label="Polish 🇵🇱" value="pl" />
+            <Picker.Item label="Dutch 🇳🇱🇧🇪" value="nl" />
+            <Picker.Item label="Filipino (Tagalog) 🇵🇭" value="tl" />
+            <Picker.Item label="Thai 🇹🇭" value="th" />
+            <Picker.Item label="Greek 🇬🇷" value="el" />
+            <Picker.Item label="Hebrew 🇮🇱" value="he" />
+          </Picker>
+        </View>
       )}
 
-      {isLoading && (<ActivityIndicator size={"large"} color={COLORS.green}/>)}
+        <View style={styles.topView}>
+          {image && <Image source={{ uri: image }} style={styles.image} />}
 
-      <View style={styles.scrollView}>
-        <ScrollView>
-          {originalText && <Text>{originalText}</Text>}
-          {text && <Text>{text}</Text>}
-        </ScrollView>
-      </View>
+          {image && translateTo && (
+            <TouchableOpacity
+              onPress={uploadToCloudinary}
+              style={styles.translateTextBtn}
+            >
+              <Text style={styles.textBtn}>Translate text</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        <View style={styles.bottomView}>
+          {text && <Text style={styles.apiText}>{text}</Text>}
+        </View>
+      </ScrollView>
 
       <FloatingAction
         floatingIcon={
@@ -201,9 +245,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  text: {
-    fontSize: FONT_SIZE.mainText_Seoge.large,
-    fontFamily: "segoeui_bold",
+  translateToView: {
+    gap: 25,
+    height: 40,
+    width: "95%",
+    marginTop: 50,
+    alignItems: "center",
+    flexDirection: "row",
+  },
+
+  toText: {
+    fontSize: 15,
+    fontFamily: "segoeui_blackItalic",
+  },
+
+  picker: {
+    height: 60,
+    width: "80%",
+    marginLeft: 10,
+    backgroundColor: COLORS.secondaryGrey,
   },
 
   image: {
@@ -229,6 +289,21 @@ const styles = StyleSheet.create({
 
   scrollView: {
     width: "95%",
+  },
+
+  topView: {
     marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  bottomView: {
+    paddingVertical: 20,
+  },
+
+  apiText: {
+    fontSize: 16,
+    fontFamily: "segoeui_bold",
+    color: COLORS.backgroundColor,
   },
 });
