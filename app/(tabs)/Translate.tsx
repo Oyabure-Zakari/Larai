@@ -165,8 +165,7 @@ export default function Translate() {
   return (
     <SafeAreaView style={styles.container}>
 
-      <ScrollView style={styles.scrollView}>
-      {image && (
+{image && (
         <View style={styles.translateToView}>
           <Text style={styles.toText}>To: </Text>
           <Picker
@@ -216,6 +215,8 @@ export default function Translate() {
             </TouchableOpacity>
           )}
         </View>
+
+      <ScrollView style={styles.scrollView}>
 
         <View style={styles.bottomView}>
           {text && <Text style={styles.apiText}>{text}</Text>}
@@ -292,7 +293,9 @@ const styles = StyleSheet.create({
   },
 
   topView: {
+    width: "100%",
     marginTop: 20,
+    paddingBottom: 10,
     alignItems: "center",
     justifyContent: "center",
   },
