@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { StyleSheet, Text, Image } from "react-native";
@@ -34,6 +34,7 @@ import { ActivityIndicator } from "react-native";
 import { Alert } from "react-native";
 import { ScrollView } from "react-native";
 import { View } from "react-native";
+import { isLoading } from "expo-font";
 
 const actions = [
   {
@@ -56,6 +57,8 @@ const actions = [
   },
 ];
 
+
+
 export default function Translate() {
   const [image, setImage] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -68,13 +71,12 @@ export default function Translate() {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: "images",
       allowsEditing: true,
-      aspect: [4, 3],
+      // aspect: [4, 3],
       quality: 1,
     });
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      console.log(image);
     }
   };
 
@@ -83,11 +85,9 @@ export default function Translate() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: "images",
       allowsEditing: true,
-      aspect: [4, 3],
+      // aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -107,7 +107,10 @@ export default function Translate() {
     }
   };
 
-  const uploadToCloudinary = async () => {
+  const translateText = async () => {
+    setIsLoading(true);
+
+    // cloudinary
     const cld = new Cloudinary({
       cloud: {
         cloudName: CLOUD_NAME,
@@ -128,44 +131,48 @@ export default function Translate() {
       callback: (error: any, response: any) => {
         //.. handle response
         if (response) {
-          console.log(response.url);
           setImageUrl(response.url);
-          translateApi(imageUrl);
         } else {
-          console.log(error);
           setError(error);
+          console.log("from cloudinary", error);
         }
       },
     });
+
+      // ocr extract text api
+      const apiOptions = {
+        method: "GET",
+        url: OCR_EXTRACT_TEXT_API_URL,
+        params: {
+          url: imageUrl,
+          dest: translateTo,
+        },
+        headers: {
+          "x-rapidapi-key": OCR_EXTRACT_TEXT_RAPID_API_KEY,
+          "x-rapidapi-host": OCR_EXTRACT_TEXT_RAPID_API_HOST,
+        },
+      };
+
+      try {
+        const response = await axios.request(apiOptions);
+        setText(response.data.text);
+        setIsLoading(false);
+      } catch (error:any) {
+        console.log("from api", error);
+        setError(error);
+        setIsLoading(false);
+      }
   };
 
-  async function translateApi(imageUrl: string) {
-    const options = {
-      method: "GET",
-      url: OCR_EXTRACT_TEXT_API_URL,
-      params: {
-        url: imageUrl,
-        dest: translateTo,
-      },
-      headers: {
-        "x-rapidapi-key": OCR_EXTRACT_TEXT_RAPID_API_KEY,
-        "x-rapidapi-host": OCR_EXTRACT_TEXT_RAPID_API_HOST,
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      console.log("from api", response.data);
-      setText(response.data.text);
-    } catch (error) {
-      console.error("from api", error);
+  useEffect(() => {
+    if (error) {
+      Alert.alert("Error", "Oops something went wrong try again", [{ text: "OK" }]);
     }
-  }
+  }, [error]);
 
   return (
-    <SafeAreaView style={styles.container}>
-
-{image && (
+    <SafeAreaView style={styles.container}> 
+      {image && (
         <View style={styles.translateToView}>
           <Text style={styles.toText}>To: </Text>
           <Picker
@@ -203,21 +210,25 @@ export default function Translate() {
         </View>
       )}
 
-        <View style={styles.topView}>
-          {image && <Image source={{ uri: image }} style={styles.image} />}
+      <View style={styles.topView}>
+        {image && <Image source={{ uri: image }} style={styles.image} />}
 
-          {image && translateTo && (
-            <TouchableOpacity
-              onPress={uploadToCloudinary}
-              style={styles.translateTextBtn}
-            >
+        {image && translateTo && (
+          <TouchableOpacity
+            disabled={isLoading}
+            onPress={translateText}
+            style={styles.translateTextBtn}
+          >
+            {isLoading ? (
+              <ActivityIndicator size={"small"} color={COLORS.green} />
+            ) : (
               <Text style={styles.textBtn}>Translate text</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+            )}
+          </TouchableOpacity>
+        )}
+      </View>
 
       <ScrollView style={styles.scrollView}>
-
         <View style={styles.bottomView}>
           {text && <Text style={styles.apiText}>{text}</Text>}
         </View>
@@ -271,6 +282,7 @@ const styles = StyleSheet.create({
     width: "95%",
     height: 200,
     marginTop: 20,
+    borderRadius: 10
   },
 
   translateTextBtn: {
