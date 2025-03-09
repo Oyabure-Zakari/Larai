@@ -42,3 +42,14 @@ export type useTranslationStoreType = {
     translateTo: string
   ) => Promise<void>;
 };
+
+export type ExtractTextTranslationStoreType = {
+  error: any;
+  text: string;
+  image: string;
+  imageUrl: string;
+  isLoading: boolean;
+  translateTo: string;
+
+  setTranslateTo: (language: string) => void;
+};
