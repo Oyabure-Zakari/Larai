@@ -132,6 +132,8 @@ export default function Translate() {
         //.. handle response
         if (response) {
           setImageUrl(response.url);
+          console.log(response.url);
+          
         } else {
           setError(error);
           console.log("from cloudinary", error);
