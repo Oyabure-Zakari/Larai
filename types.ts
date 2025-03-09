@@ -43,6 +43,7 @@ export type useTranslationStoreType = {
   ) => Promise<void>;
 };
 
+// type for the ExtractTextTranslationStore
 export type ExtractTextTranslationStoreType = {
   error: any;
   image: string;
