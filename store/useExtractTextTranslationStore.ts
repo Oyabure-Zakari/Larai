@@ -4,6 +4,8 @@ import * as ImagePicker from "expo-image-picker";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { upload } from "cloudinary-react-native";
 
+import { ExtractTextTranslationStoreType } from "@/types";
+
 import {
   CLOUD_NAME,
   UPLOAD_PRESET,
@@ -12,49 +14,51 @@ import {
   OCR_EXTRACT_TEXT_RAPID_API_HOST,
 } from "@env";
 
-import { ExtractTextTranslationStoreType } from "@/types";
-
-export const useExtractTextTranslationStore =
-  create<ExtractTextTranslationStoreType>((set) => ({
+export const useExtractTextTranslationStore = create<ExtractTextTranslationStoreType>((set, get) => ({
     error: "",
-    translatedText: "",
     image: "",
     imageUrl: "",
     translateTo: "",
+    translatedText: "",
     isLoading: false,
 
     setTranslateTo: (language) => set({ translateTo: language }),
 
-    // function to take a picture using expo image picker
     takePhoto: async () => {
       let result = await ImagePicker.launchCameraAsync({
         mediaTypes: "images",
         allowsEditing: true,
-        // aspect: [4, 3],
         quality: 1,
       });
 
-      !result.canceled && set({ image: result.assets[0].uri });
+      if (!result.canceled) {
+        set({ image: result.assets[0].uri });
+      }
     },
 
-    // function to take a picture from the gallery using expo image picker
     pickImage: async () => {
-      // No permissions request is necessary for launching the image library
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: "images",
         allowsEditing: true,
-        // aspect: [4, 3],
         quality: 1,
       });
 
-      !result.canceled && set({ image: result.assets[0].uri });
+      if (!result.canceled) {
+        set({ image: result.assets[0].uri });
+      }
     },
 
-    // function to extract and translate the text to the language selected by the user
-    extractTextAndTranslate: async (image, imageUrl, translateTo) => {
+    extractTextAndTranslate: async () => {
+      // get access to image & translateTo initial state
+      const { image, imageUrl, translateTo } = get();
+
+      if (!image) {
+        set({ error: "No image selected" });
+        return;
+      }
+
       set({ isLoading: true });
 
-      // cloudinary
       const cld = new Cloudinary({
         cloud: {
           cloudName: CLOUD_NAME,
@@ -69,43 +73,53 @@ export const useExtractTextTranslationStore =
         unsigned: true,
       };
 
-      await upload(cld, {
-        file: image,
-        options: options,
-        callback: (error: any, response: any) => {
-          //.. handle response
-          if (response) {
-            set({ imageUrl: response.url });
-            console.log(response.url);
-          } else {
-            set({ error });
-            console.log("from cloudinary", error);
-          }
-        },
-      });
-
-      // ocr extract text api
-      const apiOptions = {
-        method: "GET",
-        url: OCR_EXTRACT_TEXT_API_URL,
-        params: {
-          url: imageUrl,
-          dest: translateTo,
-        },
-        headers: {
-          "x-rapidapi-key": OCR_EXTRACT_TEXT_RAPID_API_KEY,
-          "x-rapidapi-host": OCR_EXTRACT_TEXT_RAPID_API_HOST,
-        },
-      };
-
       try {
+        await upload(cld, {
+          file: image,
+          options: options,
+          callback: (error: any, response: any) => {
+            //.. handle response
+            if (response) {
+              set({ imageUrl: response.url });
+              console.log(response.url);
+            } else {
+              set({ error });
+              console.log("from cloudinary", error);
+            }
+          },
+        });
+
+        if (!imageUrl) {
+          set({ error: "Failed to get image URL", isLoading: false });
+          return;
+        }
+
+        // OCR API call
+        const apiOptions = {
+          method: "GET",
+          url: OCR_EXTRACT_TEXT_API_URL,
+          params: {
+            url: imageUrl,
+            dest: translateTo,
+          },
+          headers: {
+            "x-rapidapi-key": OCR_EXTRACT_TEXT_RAPID_API_KEY,
+            "x-rapidapi-host": OCR_EXTRACT_TEXT_RAPID_API_HOST,
+          },
+        };
         const response = await axios.request(apiOptions);
-        set({ translatedText: response.data.text });
-        set({ isLoading: false });
+        set({
+          error: "",
+          isLoading: false,
+          translatedText: response.data.text,
+        });
       } catch (error: any) {
-        console.log("from api", error);
-        set({ error });
-        set({ isLoading: false });
+        console.log("Error during upload or API call:", error);
+        set({
+          error: error.message || "An error occurred",
+          isLoading: false,
+          translatedText: "",
+        });
       }
     },
-  }));
+}));

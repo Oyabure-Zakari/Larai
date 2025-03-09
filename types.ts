@@ -51,9 +51,8 @@ export type ExtractTextTranslationStoreType = {
   isLoading: boolean;
   translateTo: string;
   translatedText: string;
-
   takePhoto: () => Promise<void>;
   pickImage: () => Promise<void>;
-  extractTextAndTranslate: (image:string, imageUrl:string, translateTo:string) => Promise<void>;
   setTranslateTo: (language: string) => void;
+  extractTextAndTranslate: () => Promise<void>;
 };
