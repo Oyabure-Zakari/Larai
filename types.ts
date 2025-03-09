@@ -45,14 +45,14 @@ export type useTranslationStoreType = {
 
 export type ExtractTextTranslationStoreType = {
   error: any;
-  text: string;
   image: string;
   imageUrl: string;
   isLoading: boolean;
   translateTo: string;
+  translatedText: string;
 
   takePhoto: () => Promise<void>;
   pickImage: () => Promise<void>;
-  translateText: (image:string, imageUrl:string, translateTo:string) => Promise<void>;
+  extractTextAndTranslate: (image:string, imageUrl:string, translateTo:string) => Promise<void>;
   setTranslateTo: (language: string) => void;
 };
