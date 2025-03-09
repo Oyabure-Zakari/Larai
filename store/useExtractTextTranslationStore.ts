@@ -17,7 +17,7 @@ import { ExtractTextTranslationStoreType } from "@/types";
 export const useExtractTextTranslationStore =
   create<ExtractTextTranslationStoreType>((set) => ({
     error: "",
-    text: "",
+    translatedText: "",
     image: "",
     imageUrl: "",
     translateTo: "",
@@ -51,7 +51,7 @@ export const useExtractTextTranslationStore =
     },
 
     // function to extract and translate the text to the language selected by the user
-    translateText: async (image, imageUrl, translateTo) => {
+    extractTextAndTranslate: async (image, imageUrl, translateTo) => {
       set({ isLoading: true });
 
       // cloudinary
@@ -100,7 +100,7 @@ export const useExtractTextTranslationStore =
 
       try {
         const response = await axios.request(apiOptions);
-        set({ text: response.data.text });
+        set({ translatedText: response.data.text });
         set({ isLoading: false });
       } catch (error: any) {
         console.log("from api", error);
