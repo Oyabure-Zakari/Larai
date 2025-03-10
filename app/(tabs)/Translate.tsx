@@ -1,40 +1,26 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 
 import { StyleSheet, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FloatingAction } from "react-native-floating-action";
 
-import * as ImagePicker from "expo-image-picker";
-
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import axios from "axios";
-
 import { COLORS } from "@/constants/colors";
-import { FONT_SIZE } from "@/constants/fonts";
+
 
 import { Picker } from "@react-native-picker/picker";
 
-import {
-  CLOUD_NAME,
-  UPLOAD_PRESET,
-  OCR_EXTRACT_TEXT_API_URL,
-  OCR_EXTRACT_TEXT_RAPID_API_KEY,
-  OCR_EXTRACT_TEXT_RAPID_API_HOST,
-} from "@env";
-
-import { Cloudinary } from "@cloudinary/url-gen";
-import { upload } from "cloudinary-react-native";
 import { TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native";
 import { Alert } from "react-native";
 import { ScrollView } from "react-native";
 import { View } from "react-native";
-import { isLoading } from "expo-font";
+
+import { useExtractTextTranslationStore } from "@/store/useExtractTextTranslationStore";
 
 const actions = [
   {
@@ -60,39 +46,15 @@ const actions = [
 
 
 export default function Translate() {
-  const [image, setImage] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState("");
-  const [translateTo, setTranslateTo] = useState("");
-  const [error, setError] = useState("");
-  const [text, setText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const takePhoto = async () => {
-    let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: "images",
-      allowsEditing: true,
-      // aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
-
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: "images",
-      allowsEditing: true,
-      // aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
+const image = useExtractTextTranslationStore ((state) => state.image);
+const pickImage = useExtractTextTranslationStore ((state) => state.pickImage);
+const translatedText = useExtractTextTranslationStore ((state) => state.translatedText);
+const takePhoto = useExtractTextTranslationStore ((state) => state.takePhoto);
+const translateTo = useExtractTextTranslationStore ((state) => state.translateTo);
+const setTranslateTo = useExtractTextTranslationStore ((state) => state.setTranslateTo);
+const error = useExtractTextTranslationStore ((state) => state.error);
+const isLoading = useExtractTextTranslationStore ((state) => state.isLoading);
+const extractTextAndTranslate = useExtractTextTranslationStore ((state) => state.extractTextAndTranslate);
 
   const handlePress = (name?: string) => {
     switch (name) {
@@ -105,65 +67,6 @@ export default function Translate() {
       default:
         console.log(`Unknown button: ${name}`);
     }
-  };
-
-  const translateText = async () => {
-    setIsLoading(true);
-
-    // cloudinary
-    const cld = new Cloudinary({
-      cloud: {
-        cloudName: CLOUD_NAME,
-      },
-      url: {
-        secure: true,
-      },
-    });
-
-    const options = {
-      upload_preset: UPLOAD_PRESET,
-      unsigned: true,
-    };
-
-    await upload(cld, {
-      file: image,
-      options: options,
-      callback: (error: any, response: any) => {
-        //.. handle response
-        if (response) {
-          setImageUrl(response.url);
-          console.log(response.url);
-          
-        } else {
-          setError(error);
-          console.log("from cloudinary", error);
-        }
-      },
-    });
-
-      // ocr extract text api
-      const apiOptions = {
-        method: "GET",
-        url: OCR_EXTRACT_TEXT_API_URL,
-        params: {
-          url: imageUrl,
-          dest: translateTo,
-        },
-        headers: {
-          "x-rapidapi-key": OCR_EXTRACT_TEXT_RAPID_API_KEY,
-          "x-rapidapi-host": OCR_EXTRACT_TEXT_RAPID_API_HOST,
-        },
-      };
-
-      try {
-        const response = await axios.request(apiOptions);
-        setText(response.data.text);
-        setIsLoading(false);
-      } catch (error:any) {
-        console.log("from api", error);
-        setError(error);
-        setIsLoading(false);
-      }
   };
 
   useEffect(() => {
@@ -179,7 +82,7 @@ export default function Translate() {
           <Text style={styles.toText}>To: </Text>
           <Picker
             selectedValue={translateTo}
-            onValueChange={(value) => setTranslateTo(value)}
+            onValueChange={setTranslateTo}
             style={styles.picker}
           >
             <Picker.Item label="Select a language" value="" enabled={false} />
@@ -218,7 +121,7 @@ export default function Translate() {
         {image && translateTo && (
           <TouchableOpacity
             disabled={isLoading}
-            onPress={translateText}
+            onPress={extractTextAndTranslate}
             style={styles.translateTextBtn}
           >
             {isLoading ? (
@@ -232,7 +135,7 @@ export default function Translate() {
 
       <ScrollView style={styles.scrollView}>
         <View style={styles.bottomView}>
-          {text && <Text style={styles.apiText}>{text}</Text>}
+          {translatedText && <Text style={styles.apiText}>{translatedText}</Text>}
         </View>
       </ScrollView>
 
