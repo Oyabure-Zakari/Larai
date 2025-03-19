@@ -1,20 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 
-import { StyleSheet, Text, Image } from "react-native";
+import { StyleSheet, Image, Alert, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import { COLORS } from "@/constants/colors";
-
-import { Alert } from "react-native";
-import { ScrollView } from "react-native";
-import { View } from "react-native";
 
 import { useExtractTextTranslationStore } from "@/store/useExtractTextTranslationStore";
 
+import APIText from "@/components/translateImage/APIText";
 import FloatingBtn from "@/components/translateImage/FloatingBtn";
 import SelectLanguage from "@/components/translateImage/SelectLanguage";
 import TranslateImageTextBtn from "@/components/translateImage/TranslateImageBtn";
-import APIText from "@/components/translateImage/APIText";
 
 export default function Translate() {
 const image = useExtractTextTranslationStore ((state) => state.image);
