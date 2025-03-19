@@ -14,10 +14,10 @@ import { useExtractTextTranslationStore } from "@/store/useExtractTextTranslatio
 import FloatingBtn from "@/components/translateImage/FloatingBtn";
 import SelectLanguage from "@/components/translateImage/SelectLanguage";
 import TranslateImageTextBtn from "@/components/translateImage/TranslateImageBtn";
+import APIText from "@/components/translateImage/APIText";
 
 export default function Translate() {
 const image = useExtractTextTranslationStore ((state) => state.image);
-const translatedText = useExtractTextTranslationStore ((state) => state.translatedText);
 const error = useExtractTextTranslationStore ((state) => state.error);
 
   useEffect(() => {
@@ -35,13 +35,9 @@ const error = useExtractTextTranslationStore ((state) => state.error);
 
         <TranslateImageTextBtn/>
       </View>
-
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.bottomView}>
-          {translatedText && <Text style={styles.apiText}>{translatedText}</Text>}
-        </View>
-      </ScrollView>
       
+      <APIText/>
+
       <FloatingBtn/>
     </SafeAreaView>
   );
@@ -61,25 +57,11 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
 
-  scrollView: {
-    width: "95%",
-  },
-
   topView: {
     width: "100%",
     marginTop: 20,
     paddingBottom: 10,
     alignItems: "center",
     justifyContent: "center",
-  },
-
-  bottomView: {
-    paddingVertical: 20,
-  },
-
-  apiText: {
-    fontSize: 16,
-    fontFamily: "segoeui_bold",
-    color: COLORS.backgroundColor,
   },
 });
