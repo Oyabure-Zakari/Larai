@@ -12,28 +12,34 @@ import SelectLanguage from "@/components/translateImage/SelectLanguage";
 import TranslateImageTextBtn from "@/components/translateImage/TranslateImageBtn";
 
 export default function Translate() {
-const image = useExtractTextTranslationStore ((state) => state.image);
-const error = useExtractTextTranslationStore ((state) => state.error);
+  const image = useExtractTextTranslationStore((state) => state.image);
+  const error = useExtractTextTranslationStore((state) => state.error);
 
   useEffect(() => {
     if (error) {
-      Alert.alert("Error", "Oops something went wrong try again", [{ text: "OK" }]);
+      Alert.alert("Error", "Oops something went wrong try again", [
+        { text: "OK" },
+      ]);
     }
   }, [error]);
 
   return (
-    <SafeAreaView style={styles.container}> 
-      <SelectLanguage/>
+    <SafeAreaView style={styles.container}>
+      {/* drop down menu to select a language */}
+      <SelectLanguage />
 
       <View style={styles.topView}>
         {image && <Image source={{ uri: image }} style={styles.image} />}
 
-        <TranslateImageTextBtn/>
+        {/* button to translate the image text */}
+        <TranslateImageTextBtn />
       </View>
-      
-      <APIText/>
 
-      <FloatingBtn/>
+      {/* response from the API */}
+      <APIText />
+
+      {/* floating button for both camera and device gallery */}
+      <FloatingBtn />
     </SafeAreaView>
   );
 }
@@ -49,7 +55,7 @@ const styles = StyleSheet.create({
     width: "95%",
     height: 200,
     marginTop: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
 
   topView: {
