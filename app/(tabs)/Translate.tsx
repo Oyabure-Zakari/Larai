@@ -5,16 +5,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { COLORS } from "@/constants/colors";
 
-import { TouchableOpacity } from "react-native";
-import { ActivityIndicator } from "react-native";
 import { Alert } from "react-native";
 import { ScrollView } from "react-native";
 import { View } from "react-native";
 
 import { useExtractTextTranslationStore } from "@/store/useExtractTextTranslationStore";
+
 import FloatingBtn from "@/components/translateImage/FloatingBtn";
 import SelectLanguage from "@/components/translateImage/SelectLanguage";
-import TranslateImageBtn from "@/components/translateImage/TranslateImageBtn";
 import TranslateImageTextBtn from "@/components/translateImage/TranslateImageBtn";
 
 export default function Translate() {
@@ -56,35 +54,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  translateToView: {
-    gap: 25,
-    height: 40,
-    width: "95%",
-    marginTop: 50,
-    alignItems: "center",
-    flexDirection: "row",
-  },
-
-  toText: {
-    fontSize: 15,
-    fontFamily: "segoeui_blackItalic",
-  },
-
-  picker: {
-    height: 60,
-    width: "80%",
-    marginLeft: 10,
-    backgroundColor: COLORS.secondaryGrey,
-  },
-
   image: {
     width: "95%",
     height: 200,
     marginTop: 20,
     borderRadius: 10
   },
-
-
 
   scrollView: {
     width: "95%",
