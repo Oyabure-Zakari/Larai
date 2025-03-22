@@ -36,8 +36,8 @@ export const useDictionaryStore = create<DictionaryStoreType>((set) => ({
         error: "",
         isLoading: false,
       });
-    } catch (error) {
-      set({ error: error, isLoading: false });
+    } catch (error: any) {
+      set({ error: error.message, isLoading: false });
     }
   },
 }));

@@ -1,8 +1,8 @@
 import React from "react";
-import GetStartedUI from "@/components/login/GetStartedUI";
 import {StatusBar} from 'react-native'
 
 import { COLORS } from "@/constants/colors";
+import GetStartedUI from "@/components/getStartedUI/GetStartedUI";
 
 export default function GetStarted() {
   return (

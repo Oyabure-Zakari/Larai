@@ -15,7 +15,7 @@ export const skipButton = () => {
         title="Skip"
         buttonStyle={{ backgroundColor: COLORS.primaryGrey, borderRadius: 10 }}
         titleStyle={{color:COLORS.backgroundColor, fontSize: FONT_SIZE.consolas.small, fontFamily: "consolas", padding: 8 }}
-        onPress={() => router.push("/auth/GetStarted")}
+        onPress={() => router.push("/(onboarding)/GetStarted")}
       />
     </View>
   );
@@ -42,7 +42,7 @@ export const doneButton = () => {
         title="Next"
         buttonStyle={{ backgroundColor: COLORS.green, borderRadius: 10 }}
         titleStyle={{color:COLORS.backgroundColor, fontFamily: "segoeui_blackItalic", padding: 2, fontSize: FONT_SIZE.consolas.small }}
-        onPress={() => router.push("/auth/GetStarted")}
+        onPress={() => router.push("/(onboarding)/GetStarted")}
       />
     </View>
   );

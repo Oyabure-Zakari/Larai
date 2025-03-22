@@ -56,9 +56,9 @@ export const useTranslationStore = create<useTranslationStoreType>((set) => ({
         error: "",
         isLoading: false,
       });
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
-      set({ isLoading: false, error: error });
+      set({ isLoading: false, error: error.message });
     }
   },
 }));

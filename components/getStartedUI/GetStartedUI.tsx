@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Glob from "@/components/login/Glob";
-import WriteUp from "@/components/login/WriteUp";
-import Button from "@/components/login/Button";
-import LaraiLogo from "@/components/login/LaraiLogo";
+import Glob from "@/components/getStartedUI/Glob";
+import WriteUp from "@/components/getStartedUI/WriteUp";
+import Button from "@/components/getStartedUI/Button";
+import LaraiLogo from "@/components/getStartedUI/LaraiLogo";
 import { StatusBar } from "react-native";
 import { COLORS } from "@/constants/colors";
 import { Platform } from "react-native";
