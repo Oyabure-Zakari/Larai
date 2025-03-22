@@ -1,3 +1,17 @@
+// type for firstAppLaunch function
+export type FirstAppLaunchType = {
+  success: boolean;
+};
+
+// type for useAppLaunchedStore
+export type useAppLaunchedStoreType = {
+  token: string;
+  error: string;
+  isLoading: boolean;
+  checkAppLaunch: () => Promise<void>;
+  firstAppLaunch: () => Promise<FirstAppLaunchType>;
+};
+
 // dictionary response type, which is an array of objects
 export type DictionaryResultsType = {
   definition: string;
