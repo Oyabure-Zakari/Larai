@@ -8,8 +8,11 @@ export default function ShowLoading() {
   const isLoading = useDictionaryStore((state) => state.isLoading);
 
   return (
-    <View>
-      {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
-    </View>
+    <>
+      <View style={{ flex: 1 }}></View>
+      <View>
+        {isLoading && <ActivityIndicator size={"large"} color={COLORS.green} />}
+      </View>
+    </>
   );
 }
