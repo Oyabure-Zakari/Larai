@@ -11,10 +11,9 @@ export const useAppLaunchedStore = create<useAppLaunchedStoreType>((set) => ({
   firstAppLaunch: async () => {
     set({ isLoading: true });
     try {
-      if (!TOKEN) throw new Error("TOKEN is not defined");
-      const token = TOKEN;
-      await AsyncStorage.setItem("@token", token);
-      set({ token: token, isLoading: false });
+      if (!TOKEN) throw new Error("TOKEN is not defined")
+      await AsyncStorage.setItem("@token", TOKEN);
+      set({ token: TOKEN, isLoading: false });
       return { success: true };
     } catch (error: any) {
       set({ error: error.message, isLoading: false });
