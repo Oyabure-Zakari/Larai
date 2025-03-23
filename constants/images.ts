@@ -1,10 +1,11 @@
 export const IMAGES = {
+  icon: require("../assets/images/icon.png"),
   onboard1: require("../assets/images/1-Onboard.png"),
   onboard2: require("../assets/images/2-Onboard.png"),
   onboard3: require("../assets/images/3-Onboard.png"),
   onboard4: require("../assets/images/4-Onboard.png"),
-  icon: require("../assets/images/icon.png"),
   googleIcon: require("../assets/images/google icon.png"),
-  laraiLogo: require("../assets/images/adaptive-icon.png"),
   laraiLogo2: require("../assets/images/splash-icon.png"),
+  laraiLogo: require("../assets/images/adaptive-icon.png"),
+  dictionary: require("../assets/images/Reading-glasses-rafiki.png"),
 }
