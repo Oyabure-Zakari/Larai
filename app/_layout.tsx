@@ -4,8 +4,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { Stack, useRouter, useSegments } from "expo-router";
 
-import { StatusBar } from "react-native";
-import { COLORS } from "@/constants/colors";
 import { useAppLaunchedStore } from "@/store/useAppLaunchedStore";
 
 // prevent the splash screen from auto-hiding before assets load
