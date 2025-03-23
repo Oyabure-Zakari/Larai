@@ -9,8 +9,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "@/constants/colors";
 
 import ShowError from "@/components/dictionary/ShowError";
-import HeaderText from "@/components/dictionary/HeaderText";
 import ShowLoading from "@/components/dictionary/ShowLoading";
+import DictionaryImg from "@/components/dictionary/DictionaryImg";
 import DictionaryList from "@/components/dictionary/DictionaryList";
 import TextFieldAndButton from "@/components/dictionary/TextFieldAndButton";
 
@@ -18,9 +18,8 @@ export default function Dictionary() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={COLORS.primaryGrey} />
-
-      {/* header text */}
-      <HeaderText />
+      
+      <DictionaryImg/>
 
       {/* shows error */}
       <ShowError/>
