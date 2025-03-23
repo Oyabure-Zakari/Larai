@@ -23,7 +23,8 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    checkAppLaunch(); // Check token on mount
+    // updates the token state in the store by using the token value saved in aysnc storage, which makes the app remember that the user "is signed in" or in this case "has launched the app before"
+    checkAppLaunch(); 
   }, []);
 
   useEffect(() => {
@@ -31,7 +32,6 @@ export default function RootLayout() {
       // Only navigate after fonts are loaded and Stack is rendered
       const hasLaunchedApp = token;
       const isInOnboardingScreen = segments[0] === "(onboarding)";
-
       if (!hasLaunchedApp && !isInOnboardingScreen) router.replace("/(onboarding)");
       else if (hasLaunchedApp && isInOnboardingScreen) router.replace("/(tabs)");
       
