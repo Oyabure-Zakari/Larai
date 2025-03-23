@@ -1,19 +1,14 @@
 import React from "react";
-
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
-
-import { useRouter } from "expo-router";
+import {StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
 
 import { FONT_SIZE } from "@/constants/fonts";
 import { COLORS } from "@/constants/colors";
-import { Alert } from "react-native";
 import { useAppLaunchedStore } from "@/store/useAppLaunchedStore";
 
 
 export default function Button() {
-  const router = useRouter();
-  const firstAppLaunch = useAppLaunchedStore((state) => state.firstAppLaunch);
   const error = useAppLaunchedStore((state) => state.error);
+  const firstAppLaunch = useAppLaunchedStore((state) => state.firstAppLaunch);
   
   const handleAppLaunch = async () => {
     const result = await firstAppLaunch();
@@ -23,7 +18,6 @@ export default function Button() {
   return (
     <TouchableOpacity
       style={styles.loginBtn}
-      // onPress={() => router.push("/(tabs)")}
       onPress={handleAppLaunch}
     >
       <Text style={styles.loginText}>Get started</Text>
