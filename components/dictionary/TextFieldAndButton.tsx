@@ -1,17 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useDictionaryStore } from "@/store/useDictionaryStore";
+import { StyleSheet, View } from "react-native";
+
 import TextField from "./TextField";
 import SendWordBtn from "./SendWordBtn";
 
 export default function TextFieldAndButton() {
-  const word = useDictionaryStore((state) => state.word);
-
   return (
     <View style={styles.textAndButtonView}>
+      {/* input field */}
       <TextField />
-
-      {word.length > 0 && <SendWordBtn />}
+      {/* button */}
+      <SendWordBtn />
     </View>
   );
 }
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     marginTop: "auto",
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between",
     paddingHorizontal: 4,
+    justifyContent: "space-between",
   },
 });
